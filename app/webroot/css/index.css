@@ -1,0 +1,53 @@
+.tiles{
+  overflow: hidden;
+}
+
+
+
+
+@media screen and (min-width: 769px) {
+
+.tiles {
+  margin:20px 150px;
+}
+
+.tiles .posts{
+  float: left;
+  width: 20%;
+  box-shadow: ;
+  margin:20px;
+  height: 350px;
+  border-radius: 4px ;
+  border: 1px solid black;
+
+}
+
+.posts .title{
+  font-size: 17px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.posts .body{
+  font-size: 10px;
+  text-overflow: clip;
+}
+
+#footer{
+    height: 200px;
+}
+
+#footer p{
+  text-align: center;
+  color: white;
+  margin-top: 160px;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+/* ここにスタイルを記述 */
+}
+@media screen and (max-width: 640px) {
+/* ここにスタイルを記述 */
+}

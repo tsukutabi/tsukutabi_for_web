@@ -9,6 +9,8 @@
 /dist
 /tags
 *.mo
+.bower.js.swp
+
 
 # IDE and editor specific files #
 #################################
