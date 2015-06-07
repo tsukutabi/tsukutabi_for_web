@@ -1,0 +1,15 @@
+{
+  "name": "sly",
+  "homepage": "https://github.com/darsain/sly",
+  "version": "1.5.1",
+  "_release": "1.5.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.5.1",
+    "commit": "aa62f954b3c27d0ddda7c0f6ae8b404c9a9494ac"
+  },
+  "_source": "git://github.com/darsain/sly.git",
+  "_target": "~1.5.1",
+  "_originalSource": "sly",
+  "_direct": true
+}
