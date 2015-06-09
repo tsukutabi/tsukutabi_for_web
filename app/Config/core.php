@@ -222,12 +222,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhG93b0qyJfIxfs2guVoUhjhjkjfubniR2G0FgaC9mi');
+	Configure::write('Security.salt', 'DYhG93b0qyJfIx2guVoUubWwvniR2G0FgaC9mi');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '7685930965799999999945354249683645');
+	Configure::write('Security.cipherSeed', '768593096574535496749683645');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -267,7 +267,7 @@
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-date_default_timezone_set('Asia/Tokyo');
+	//date_default_timezone_set('UTC');
 
 /**
  * `Config.timezone` is available in which you can set users' timezone string.
@@ -365,14 +365,13 @@ $prefix = 'myapp_';
  * Configure the cache used for general framework caching. Path information,
  * object listings, and translation cache files are stored with this configuration.
  */
-// @@ 371,8 @@
 Cache::config('_cake_core_', array(
-        'prefix' => $prefix . 'cake_core_',
-        'path' => CACHE . 'persistent' . DS,
-        'serialize' => ($engine === 'File'),
-       'duration' => $duration,
-       'mask' => 0666,
- ));
+	'engine' => $engine,
+	'prefix' => $prefix . 'cake_core_',
+	'path' => CACHE . 'persistent' . DS,
+	'serialize' => ($engine === 'File'),
+	'duration' => $duration
+));
 
 /**
  * Configure the cache for model and datasource caches. This cache configuration
@@ -385,12 +384,3 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
-
-
-Cache::config('_cake_model_', array(
-        'prefix' => $prefix . 'cake_model_',
-        'path' => CACHE . 'models' . DS,
-        'serialize' => ($engine === 'File'),
-       'duration' => $duration,
-       'mask' => 0666,
- ));

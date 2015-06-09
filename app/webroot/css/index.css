@@ -2,6 +2,75 @@
   overflow: hidden;
 }
 
+/*===============================================
+●style.css 画面の横幅が769px以上
+===============================================*/
+@media screen and (min-width: 769px) {
+  .main_p {
+    font-size: 30px;
+    color: #f0f0f0;
+    position: absolute;
+    z-index: 100;
+    top: 280px;
+    margin-left: 39%;
+  }
+  .main_h1 {
+    font-size: 100px;
+    color: #f0f0f0;
+    position: absolute;
+    z-index: 100;
+    top: 110px;
+    margin-left: 33%;
+  }
+  .article ul {
+    margin-left: -78px;
+  }
+  .posts {
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    width: 20%;
+    height: 350px;
+    margin-left: 5%;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  .posts:hover {
+    background-color: #f1f1f1;
+  }
+
+  .post img{
+    width: 212px;
+  }
+}
+/*===============================================
+●tablet.css 画面の横幅が768pxまで
+===============================================*/
+@media screen and (max-width: 768px) {
+  img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+}
+/*===============================================
+●smart.css  画面の横幅が640pxまで
+===============================================*/
+@media screen and (max-width: 640px) {
+  img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+  #container {
+    width: 100%;
+  }
+}
 
 
 

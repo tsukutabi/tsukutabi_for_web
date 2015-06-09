@@ -23,10 +23,7 @@
  */
 
 // Setup a 'default' cache configuration for use in the application.
-Cache::config('default', array(
-	'engine' => 'File',
-	'mask'=>0666
-	));
+Cache::config('default', array('engine' => 'File'));
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
@@ -96,15 +93,6 @@ Cache::config('default', array(
  *
  * ));
  */
-
-// require_once __DIR__ . '/../vendor/autoload.php';
-
-include __DIR__ . '/bootstrap/environments.php';
-
-Configure::write('Dispatcher.filters', array(
-    'AssetDispatcher',
-    'CacheDispatcher'
-));
 Configure::write('Dispatcher.filters', array(
 	'AssetDispatcher',
 	'CacheDispatcher'
@@ -127,3 +115,11 @@ CakeLog::config('error', array(
 
 
 CakePlugin::loadAll();
+
+
+
+
+
+
+
+
