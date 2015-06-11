@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.uk-modal-header .textcenter{
+  text-align:center;
+}
+
 /*===============================================
 ●style.css 画面の横幅が769px以上
 ===============================================*/

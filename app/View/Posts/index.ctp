@@ -3,14 +3,15 @@
 
 <h1 class="main_h1">つくたび</h1>
   <p class="main_p">do travel, share it</p>
-<?php echo $this->element(slider);?>
+<?php echo $this->element('slider');?>
 <header>
   <nav>
   <ul class="left">
-    <li><?php echo $this->Html->link('ログイン画面', '/users/login/'); ?></li>
-    <li><?php echo $this->Html->link('新規ユーザ登録', '/users/add/'); ?></li>
+    <li><button class="uk-button" data-uk-modal="{target:'#user-login'}">ログイン画面</button>
+    <?php echo $this->Html->link('ログイン', '/users/login/'); ?></li>
+    <li><button class="uk-button" data-uk-modal="{target:'#user-register'}">会員登録</button>
+<!--     <?php echo $this->Html->link('新規ユーザ登録', '/users/add/'); ?> -->    </li>
     <li><?php echo $this->Html->link('旅行記作成', '/posts/add/'); ?></li>
-
   </ul>
 
   <ul class="right">
@@ -20,6 +21,38 @@
   </nav>
   </header>
 
+
+<!-- This is the modal -->
+<div id="user-login" class="uk-modal">
+    <div class="uk-modal-dialog">
+    <div class="uk-modal-header"><p class="textcenter">ユーザーログイン画面</p></div>
+    <form class="uk-form">
+        email<input type="text" placeholder="email" class="uk-form-width-medium">
+        password <input type="text" class="uk-form-width-medium" name="" value="" placeholder="password"><br>
+
+        </form>
+        <div class="uk-modal-footer">...</div>
+        <a class="uk-modal-close uk-close"></a>
+
+    </div>
+</div>
+
+<div id="user-register" class="uk-modal">
+  <form action="index_submit" method="post" class="uk-form" accept-charset="utf-8">
+     <div class="uk-modal-dialog">
+        <div class="uk-modal-header"><p class="textcenter">新規会員登録</p></div>
+    email<input type="text" placeholder="email" class="uk-form-width-medium">
+        password <input type="text" class="uk-form-width-medium" name="" value="" placeholder="password"><br>
+
+        ユーザー名<input type="text" name="" value="" placeholder="ユーザー名" class="uk-form-width-medium">
+    規約に同意する<input type="checkbox" class="uk-checkbox" name="" value="">
+        <div class="uk-modal-footer">
+          送信する
+        </div>
+  </form>
+  </div>
+</div>
+<!-- modalここまで -->
                              <!--  <ol class="wrapper"><?php
                                    echo $this->Html->link('会員登録',
                                         array('controller'=>'users','action'=>'signup',
@@ -56,7 +89,7 @@
 </footer>
 
 
-     <?php echo $this->Html->script('jquery.sliderPro.min.js');
+     <?php echo $this->Html->script(array('jquery.sliderPro.min.js','index.js'));
     echo $this->fetch('script');?>
 
     <script type="text/javascript">
@@ -80,4 +113,9 @@ $( document ).ready(function( $ ) {
       }
     });
   });
+</script>
+
+
+<script type="text/javascript">
+
 </script>

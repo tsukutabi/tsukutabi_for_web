@@ -9,7 +9,7 @@ class PostsController extends AppController{
 		parent::beforeFilter();
 		$this->Auth->allow('users/login','users/add','index','view','jsonapi');
 	}
-	// 使う関数まとめてますよ〜〜
+	// 使う関数まとめ
 	// ユーザーIDとpost idのマッチングをする。
 	private function MatchUserIdtoPost($value='')
 	{

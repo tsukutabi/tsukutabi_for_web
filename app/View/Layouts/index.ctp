@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<title>つくたび</title>
 	<?php echo $this->Html->css(array('reset','slider-pro.min' ,'index', 'uikit.min'));?>
-	<?php echo $this->Html->script(array('uikit'));?>
+	<?php echo $this->Html->script(array('uikit.js'));?>
 
 <script type="text/javascript" src="<?php echo "$webroot";?>/js/upload.js"></script>
 <!-- <link rel="stylesheet" type="text/css" href="/debug_kit/css/debug_toolbar.css" /> -->

@@ -1,3 +1,4 @@
+// 記事が動くやつ
 $('.panel_hover').hover({
 	function () {
 		$('.main_title').prepend($("<p>テスト</p>"))
@@ -9,6 +10,8 @@ $('.panel_hover').hover({
 		$(this).find("span:last").remove();
 	}
 });
+
+// navがついてくるやつ
 
 jQuery(function($) {
 	var NavDistanse= $('#navi'),
@@ -25,4 +28,18 @@ jQuery(function($) {
 
 
 
-// console.log("NavOffset');
+// user登録を非同期で送るやつ。
+
+
+
+// userがログインしたか監視
+// ログインしたら.display:noneして
+// 名前とリンクを表示
+
+
+
+
+
+
+
+
