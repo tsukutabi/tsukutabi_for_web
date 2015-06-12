@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+#footer .vision{
+  color:black;
+}
+
 .uk-modal-header .textcenter{
   text-align:center;
 }

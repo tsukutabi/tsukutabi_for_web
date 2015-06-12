@@ -15,7 +15,7 @@ class EmailsController extends AppController{
         $sent = $email
             ->template('text_mail')         // ←テンプレ名
             ->viewVars($mailbody)           // ←メール内容配列をテンプレに渡す
-            ->from(array('kousuke.econ15060709@hotmail.co.jp' => '送信元名'))
+            ->from(array('kousuketanihata@yahoo.co.jp' => '送信元名'))
             ->to('送信先アドレス')
             ->subject('件名')
             ->send();
