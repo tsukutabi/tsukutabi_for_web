@@ -4,7 +4,16 @@
 
 <form class="uk-form ">
 	<input type="text" name="title" value="" placeholder="title">
-	<input type="submit" name="" value="">
+
+
+
+
+
+
+	<input type="submit" name="送信" value="submit">
 </form>
 
 
+
+<script type="text/javascript">
+</script>
