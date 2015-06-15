@@ -7,11 +7,32 @@
 <header>
   <nav>
   <ul class="left">
+  <?php if (isset($username)) {
+    echo   '<li><a href="'. FULL_BASE_URL .'"'. "$username>". "$username" .'</a></li>';
+   } else{
+    echo $this->html->link('ログイン画面',
+      array(
+        'controller'=>'users/users',
+        'action'=>'login'
+        ),
+      array('target'=>'_blank',
+        'clasS' =>'uk-botton'
+        )
+      );
+  }?>
     <li><button class="uk-button" data-uk-modal="{target:'#user-login'}">ログイン画面</button>
     <?php echo $this->Html->link('ログイン', '/users/login/'); ?></li>
     <li><button class="uk-button" data-uk-modal="{target:'#user-register'}">会員登録</button>
-<!--     <?php echo $this->Html->link('新規ユーザ登録', '/users/add/'); ?> -->    </li>
+<!--     <?php echo $this->Html->link('新規ユーザ登録', '/users/add/'); ?> -->
     <li><?php echo $this->Html->link('旅行記作成', '/posts/add/'); ?></li>
+  </ul>
+
+  <ul class="SerachPosts">
+    <li>
+      <form action="" method="post" accept-charset="utf-8">
+        <input type="text" name="" value="" placeholder="検索して下さい">
+      </form>
+    </li>
   </ul>
 
   <ul class="right">
@@ -45,6 +66,7 @@
         password <input type="text" class="uk-form-width-medium" name="" value="" placeholder="password"><br>
 
         ユーザー名<input type="text" name="" value="" placeholder="ユーザー名" class="uk-form-width-medium">
+        password <input type="text" class="uk-form-width-medium" name="" value="" placeholder="password確認用"><br>
     規約に同意する<input type="checkbox" class="uk-checkbox" name="" value="">
         <div class="uk-modal-footer">
           送信する
@@ -113,4 +135,17 @@ $( document ).ready(function( $ ) {
   });
 
 
+function user_add (user_add) {
+  $user_add = $('#UploadFormUserAdd');
+  fd =new F
+  $.ajax(
+    'users/users/add'{
+      type:'post',
+      dataType:'json',
+
+    }
+    )
+}
+
+$().focus()
 </script>

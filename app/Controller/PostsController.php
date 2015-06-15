@@ -1,5 +1,5 @@
 <?php
-App::uses('Folder','Utility');
+App::uses('Folder','Utility','Session');
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
@@ -26,11 +26,11 @@ class PostsController extends AppController{
 	public function index()
 	{
 		$params = array(
+			// 15件取る
 			'order' => 'modified desc','limit' =>'15'
 			);
-		if ($this->Session->check('Auth.User.username')) {
-			$this->set('username',$this->Session->read('Auth.User.username'));
-		}
+		// ユーザーの名前を取る。
+		$this->set('username',$this->Session->read('Auth.User.username'));
 		// 以下書き換える!!
 		$this->set('posts',$this->Post->find('all'));
 		// 新着のデータ
