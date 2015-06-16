@@ -2,37 +2,41 @@
     echo $this->fetch('css');?>
 
 <h1 class="main_h1">つくたび</h1>
+<form action="serch/index" method="post" accept-charset="utf-8" class="SerchArticle uk-form">
+ <input type="text" name="" class="SerchInput" value="" placeholder="検索して下さい">
+</form>
   <p class="main_p">do travel, share it</p>
 <?php echo $this->element('slider');?>
+
+
+
 <header>
   <nav>
   <ul class="left">
   <?php if (isset($username)) {
     echo   '<li><a href="'. FULL_BASE_URL .'"'. "$username>". "$username" .'</a></li>';
    } else{
+    echo "<li><botton>";
     echo $this->html->link('ログイン画面',
       array(
-        'controller'=>'users/users',
+        'controller'=>'users',
         'action'=>'login'
         ),
-      array('target'=>'_blank',
-        'clasS' =>'uk-botton'
-        )
-      );
+      array(
+        'target'=>'_blank'
+        ));
+    echo "</li></botton><botton><li>";
+    echo $this->html->link('会員登録',
+        array(
+          'controller'=>'users',
+          'action'=>'add'
+          ),
+        array(
+          'target'=>'_blank'
+        ));
+    echo "</li><botton>";
   }?>
-    <li><button class="uk-button" data-uk-modal="{target:'#user-login'}">ログイン画面</button>
-    <?php echo $this->Html->link('ログイン', '/users/login/'); ?></li>
-    <li><button class="uk-button" data-uk-modal="{target:'#user-register'}">会員登録</button>
-<!--     <?php echo $this->Html->link('新規ユーザ登録', '/users/add/'); ?> -->
     <li><?php echo $this->Html->link('旅行記作成', '/posts/add/'); ?></li>
-  </ul>
-
-  <ul class="SerachPosts">
-    <li>
-      <form action="" method="post" accept-charset="utf-8">
-        <input type="text" name="" value="" placeholder="検索して下さい">
-      </form>
-    </li>
   </ul>
 
   <ul class="right">
@@ -105,8 +109,19 @@
      </ul>
 
 
-<?php echo $this->element('footer');?>
 
+<footer id="footer">
+<div class="">
+  <div class="uk-">
+    <p>つくたび.comへアクセスして頂きましてありがとうございます。
+私達は旅人のために情報共有サイトです。
+旅行に行った人は旅の写真を共有して下さい。
+旅行に行く人は行き先を検索して下さい。新たな発見がきっとあると思います。
+    </p>
+  </div>
+</div>
+  <p>all right reserved by たにはた こうすけ</p>
+</footer>
 
 
      <?php echo $this->Html->script(array('jquery.sliderPro.min.js','index.js'));
@@ -133,7 +148,10 @@ $( document ).ready(function( $ ) {
       }
     });
   });
+</script>
 
+
+<script type="text/javascript">
 
 function user_add (user_add) {
   $user_add = $('#UploadFormUserAdd');

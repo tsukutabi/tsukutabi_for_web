@@ -4,9 +4,9 @@
 */
 class AdminsController extends AppController
 {
-	public $uses('post','user');
-	function index()
+	// $uses array('posts','users');
+	public function index()
 	{
-		$this->set()
+		$this->set($items ,$this->items->find('all'));
 	}
 }
