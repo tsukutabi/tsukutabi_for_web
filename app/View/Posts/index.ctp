@@ -150,20 +150,3 @@ $( document ).ready(function( $ ) {
   });
 </script>
 
-
-<script type="text/javascript">
-
-function user_add (user_add) {
-  $user_add = $('#UploadFormUserAdd');
-  fd =new F
-  $.ajax(
-    'users/users/add'{
-      type:'post',
-      dataType:'json',
-
-    }
-    )
-}
-
-$().focus()
-</script>
