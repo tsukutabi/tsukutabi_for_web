@@ -4,7 +4,7 @@
   background:azure;
   font-size:30px;
 }
-
+/*
 .file {
   display: inline-block;
   overflow: hidden;
@@ -31,7 +31,7 @@
   font-size: 100px;
   cursor: pointer;
 }
-
+*/
 #preview img{
   width: 500px;
   height: auto;

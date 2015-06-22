@@ -7,7 +7,8 @@ class PostsController extends AppController{
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
-		$this->Auth->allow('users/login','users/add','index','view','jsonapi');
+		$this->Auth->allow('users/login',
+			'add','users/add','index','view','jsonapi');
 	}
 	// 使う関数まとめ
 	// ユーザーIDとpost idのマッチングをする。
@@ -94,7 +95,8 @@ class PostsController extends AppController{
 	}
 
 	public function add (){
-	$this->set('title_for_layout','つくたび');
+	$this->layout='add';
+	$this->set('title_for_layout','つくたび作成ページ');
 	}
 
 	public function contents($bgimgname ) {

@@ -10,7 +10,7 @@
 
 
 
-<header>
+<header data-uk-sticky>
   <nav>
   <ul class="left">
   <?php if (isset($username)) {
@@ -37,6 +37,10 @@
     echo "</li><botton>";
   }?>
     <li><?php echo $this->Html->link('旅行記作成', '/posts/add/'); ?></li>
+  </ul>
+
+  <ul class="center">
+    <li id="domestictravel">国内旅行</li>
   </ul>
 
   <ul class="right">
@@ -124,7 +128,7 @@
 </footer>
 
 
-     <?php echo $this->Html->script(array('jquery.sliderPro.min.js','index.js'));
+     <?php echo $this->Html->script(array('jquery.sliderPro.min.js','index.js','sticky.js'));
     echo $this->fetch('script');?>
 
     <script type="text/javascript">
