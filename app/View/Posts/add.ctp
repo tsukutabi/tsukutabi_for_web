@@ -2,13 +2,10 @@
 <!--[if IE]>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
-
 <header id="add-header" class="">
 	<h2>投稿ページ</h2>
 </header><!-- /header -->
-
 <div class="container">
-
     <h2 class="lead">あなたの旅行をまとめて下さい。</h2>
    <!--  <?php echo $this->form->create('posts',array('type'=>'post','action'=>'imgadd','onsubmit'=>'retrun confirm("旅行記を公開します。よろしいでしょうか?");')); ?> -->
     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
@@ -63,10 +60,10 @@
         <div class="panel-body">
             <ul>
             <li>
-
+			アップロードする写真は60枚にして下さい。
             </li>
-                <li>The maximum file size for uploads in this demo is <strong>999 KB</strong> (default file size is unlimited).</li>
-                <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
+                <li>ファイルのサイズは縮小されます。</li>
+                <li>写真はjpg gif pngのものだけがアップロードされる。</li>
                 <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
                 <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
                 <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
@@ -94,7 +91,7 @@
         </td>
         <td>
             <p class="name">{%=file.name%}</p>
-            <input type="text" name="" value="" placeholder="写真へのコメント" class="form-control">
+            <input type="text" name="ImgComments[]" value="" placeholder="写真へのコメント" class="form-control">
             <strong class="error text-danger"></strong>
         </td>
         <td>
@@ -196,6 +193,7 @@ $(function() {
 	}
 	#add-header{
 		background-color: black;
+		color: white;
 	}
 </style>
 
