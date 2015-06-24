@@ -40,17 +40,24 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		'transport' => 'Smtp',
+		'from' => array('kousuketanihata@yahoo.co.jp' => 'My Site'),
+		'host' => 'smtp.mail.yahoo.co.jp',
+		'port' => 587,
+		'timeout' => 30,
+		'username' => 'kousuketanihata',
+		'password' => '1506eetani',
+		'client' => null,
+		'log' => false,
+		'charset' => 'utf-8',
+		'headerCharset' => 'utf-8',
 	);
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
+		'from' => array('kousuketanihata@yahoo.co.jp' => 'つくたび運営事務局'),
+		'host' => 'smtp.mail.yahoo.co.jp',
+		'port' => 587,
 		'timeout' => 30,
 		'username' => 'kousuketanihata',
 		'password' => '1506eetani',
