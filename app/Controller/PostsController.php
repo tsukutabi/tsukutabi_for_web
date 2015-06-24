@@ -1,5 +1,6 @@
 <?php
 App::uses('Folder','Utility','Session');
+App::import('Vendor', 'UploadHandler', array('file' => 'file.upload/UploadHandler.php'));
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
@@ -53,12 +54,12 @@ class PostsController extends AppController{
 	$this->layout = false;
 	$this->autoLayout = false;
 	 if ($this->request->is('post')) {
-			$number = count($_FILES["userfile"]["tmp_name"]);
-		if ($number>30) {
-			$this->Session->setFlash('アップロードする画像は30枚以下にして下さい。');
+			$number = count($_FILES["files"]["tmp_name"]);
+		if ($number>59) {
+			$this->Session->setFlash('アップロードする画像は60枚以下にして下さい。');
 		}
 		for ($i=0; $i <$number; $i++){
-		 list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['userfile']['tmp_name'][$i]);
+		 list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['files']['tmp_name'][$i]);
 		 switch($mime_type[$i]){
 		 	case IMAGETYPE_JPEG:
 		 		$img_extension[$i] = "jpg";
@@ -72,6 +73,7 @@ class PostsController extends AppController{
 		 	default:
 		 	echo h('この拡張子はサポートしておりません。');
 		 }
+
 		$type =$img_extension[$i];
 		$image["imgname$i"]= md5(microtime()).".$type";
 		$uploadfile = IMAGES . $image["imgname$i"];
@@ -82,7 +84,7 @@ class PostsController extends AppController{
 	$imagename = implode(",", $image);
  	$basedata = array(
 		'Post' => array(
-		'title'=>$this->data['title'],
+		'title'=>$this->data['MainTitle'],
 		'body'=>$this->data['body'][0],
 		'mainimg'=>$image['imgname0'],
 		'bodies'=>$bodies,

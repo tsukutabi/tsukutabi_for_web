@@ -8,11 +8,11 @@
 <div class="container">
     <h2 class="lead">あなたの旅行をまとめて下さい。</h2>
    <!--  <?php echo $this->form->create('posts',array('type'=>'post','action'=>'imgadd','onsubmit'=>'retrun confirm("旅行記を公開します。よろしいでしょうか?");')); ?> -->
-    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+    <form id="fileupload" onSubmit="return upload(this);" method="POST" enctype="multipart/form-data">
 	<label>タイトル</label>
-    <input type="text" name="MainTitle" value="" placeholder="ex)飛行機を使わず 日本からエジプトまで行く話" class="form-control">
+    <input type="text" name="MainTitle" value="" placeholder="ex)飛行機を使わず 日本からエジプトまで行く話" class="form-control" required="required">
 	<label>サブタイトル</label>
-    <input type="text" name="SubTitle" value="" placeholder="ex)皆がいたからこの旅は楽しかった" class="form-control">
+    <input type="text" name="SubTitle" value="" placeholder="ex)皆がいたからこの旅は楽しかった" class="form-control" required="required">
     <label>タグ</label>
     <input type="text" name="Tags" value="" placeholder="ex)エジプト スタンド 12神 オラオラ" class="form-control">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -63,7 +63,8 @@
 			アップロードする写真は60枚にして下さい。
             </li>
                 <li>ファイルのサイズは縮小されます。</li>
-                <li>写真はjpg gif pngのものだけがアップロードされる。</li>
+                <li>写真はjpg gif pngのものだけがアップロードされます。</li>
+                <li>ドラッグ&ドロップでも、写真をアップロードできます。</li>
                 <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
                 <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
                 <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
@@ -171,22 +172,18 @@ echo $this->html->script(array('vendor/jquery.ui.widget.js'));
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- blueimp Gallery script -->
 <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-
-
 <?php
 echo $this->html->script(array('jquery.iframe-transport','jquery.fileupload.js','jquery.fileupload-process.js','jquery.fileupload-image.js','jquery.fileupload-validate.js','jquery.fileupload-ui.js','main.js','jquery-ui.js'));
 ?>
-
-
 <script>
-<!--
+// jquery ui sortableのやつ
 $(function() {
     $( '#jquery-ui-sortable' ) . sortable();
     $( '#jquery-ui-sortable' ) . disableSelection();
 });
-// -->
-</script>
 
+
+</script>
 <style type="text/css" media="screen">
 	#jquery-ui-sortable{
 		cursor:move;
@@ -196,6 +193,3 @@ $(function() {
 		color: white;
 	}
 </style>
-
-
-

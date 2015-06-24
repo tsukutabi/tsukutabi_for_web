@@ -18,7 +18,14 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'server/php/'
+        // ローカル用
+        url: 'localhost/cakephp/posts/imgadd/',
+        // 本番用
+        // url: 'tsukutabi.com/posts/imgadd/,'
+        // console.log('success'),
+        sequentialUploads: true,
+        }).on('fileuploadsubmit', function (e, data) {
+        data.formData = data.context.find(':input').serializeArray();
     });
 
     // Enable iframe cross-domain access via redirect option:
