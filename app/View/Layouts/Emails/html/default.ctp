@@ -20,8 +20,16 @@
 	<title><?php echo $this->fetch('title'); ?></title>
 </head>
 <body>
+<header id="mail-header" class="">
+
+</header><!-- /header -->
 	<?php echo $this->fetch('content'); ?>
 
-	<p>This email was sent using the <a href="http://cakephp.org">CakePHP Framework</a></p>
+
+<footer>
+	<p>
+		<a href="tsukutabi.com">つくたび</a>
+	</p>
+</footer>
 </body>
 </html>
