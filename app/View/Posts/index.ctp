@@ -14,7 +14,7 @@
   <nav>
   <ul class="left">
   <?php if (isset($username)) {
-    echo   '<li><a href="'. FULL_BASE_URL .'"'. "$username>". "$username" .'</a></li>';
+    echo   '<li><a href="'. ROOT. '$username">'. "$username" .'</a></li>';
    } else{
     echo "<li><botton>";
     echo $this->html->link('ログイン画面',

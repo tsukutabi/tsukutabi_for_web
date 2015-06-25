@@ -65,10 +65,7 @@
                 <li>ファイルのサイズは縮小されます。</li>
                 <li>写真はjpg gif pngのものだけがアップロードされます。</li>
                 <li>ドラッグ&ドロップでも、写真をアップロードできます。</li>
-                <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
-                <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
-                <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
-                <li>Built with the <a href="http://getbootstrap.com/">Bootstrap</a> CSS framework and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+                <li>アップロードされた画像及びコメントの著作権は全て、<a href="">tsukutabi.,Inc</a>が所有するものとします。</li>
             </ul>
         </div>
     </div>

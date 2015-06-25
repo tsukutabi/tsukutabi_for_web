@@ -4,12 +4,8 @@
 * posts用のmodelですよっと
 *
 */
-class ClassName extends AnotherClass
+class Posts extends AppModel
 {
-
-	function add()
-	{
-		$belongsto = $users;
-
-	}
+	public $belongsTo = 'User';
+	public $hasMany = "Comment";
 }
