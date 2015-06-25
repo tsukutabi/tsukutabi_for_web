@@ -26,9 +26,16 @@ jQuery(function($) {
 	});
 });
 
+// jQueryがふわっと消えるやつ
+
+jQuery(function($) {
+	$('#flashMessage'){
+
+	}
+});
 
 
-// user登録を非同期で送るやつ。
+
 
 
 

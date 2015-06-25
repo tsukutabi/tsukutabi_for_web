@@ -7,14 +7,11 @@
 </form>
   <p class="main_p">do travel, share it</p>
 <?php echo $this->element('slider');?>
-
-
-
 <header data-uk-sticky>
   <nav>
   <ul class="left">
   <?php if (isset($username)) {
-    echo   '<li><a href="'. ROOT. '$username">'. "$username" .'</a></li>';
+    echo   '<li><a href="'.FULL_BASE_URL.'/cakephp/users/users/view/'."$username".'"">'. "$username" .'</a></li>';
    } else{
     echo "<li><botton>";
     echo $this->html->link('ログイン画面',
@@ -152,5 +149,6 @@ $( document ).ready(function( $ ) {
       }
     });
   });
+
 </script>
 
