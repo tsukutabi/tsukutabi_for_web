@@ -9,6 +9,8 @@
     <h2 class="lead">あなたの旅行をまとめて下さい。</h2>
    <!--  <?php echo $this->form->create('posts',array('type'=>'post','action'=>'imgadd','onsubmit'=>'retrun confirm("旅行記を公開します。よろしいでしょうか?");')); ?> -->
 
+<?php echo $this->form->create('add',array('type'=>'post','class'=>'uk-form','id'=>'qq-form','onsubmit'=>'return confirm("旅行記を公開してもよろしいですか??")')); ?>
+
 <form action="server/uploads.php" id="qq-form" class="uk-form">
 
             <input type="text" name="MainTitle" required class="uk-form text_ titles" placeholder="旅行記のタイトルを入れて下さい。">
@@ -22,10 +24,17 @@
 <input type="submit" value="Done" class="uk-width-1-1 submit uk-button uk-button-primary uk-button-large"
 style="border:none;"
 >
- </form>
+ <?php echo $this->form->end('送信');?>
 
 
    </div>
+
+
+
+
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script>
 
 $('#fine-uploader-manual-trigger').fineUploader({
@@ -47,11 +56,6 @@ $('#fine-uploader-manual-trigger').fineUploader({
         });
 
 
-// jquery ui sortableのやつ
-$(function() {
-    $( '#jquery-ui-sortable' ) . sortable();
-    $( '#jquery-ui-sortable' ) . disableSelection();
-});
 // $(function () {
 //     $('#fileupload').fileupload({
 //         dataType: 'json',
