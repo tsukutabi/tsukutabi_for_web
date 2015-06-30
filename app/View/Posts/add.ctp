@@ -11,8 +11,8 @@
 
 <?php echo $this->form->create('add',array('type'=>'post','class'=>'uk-form','id'=>'qq-form','onsubmit'=>'return confirm("旅行記を公開してもよろしいですか??")')); ?>
 
-<form action="server/uploads.php" id="qq-form" class="uk-form">
-
+<!-- <form action="server/uploads.php" id="qq-form" class="uk-form">
+ -->
             <input type="text" name="MainTitle" required class="uk-form text_ titles" placeholder="旅行記のタイトルを入れて下さい。">
             <br>
 
@@ -22,38 +22,35 @@
 
     <div id="fine-uploader-manual-trigger"></div>
 <input type="submit" value="Done" class="uk-width-1-1 submit uk-button uk-button-primary uk-button-large"
-style="border:none;"
->
- <?php echo $this->form->end('送信');?>
-
+style="border:none;" id="qqform">
+<!--  <?php echo $this->form->end('送信',array('class'=>'uk-width-1-1 submit uk-button uk-button-primary uk-button-large','div'=>false));?>
+ -->
 
    </div>
-
-
-
-
-
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script>
 
-$('#fine-uploader-manual-trigger').fineUploader({
-            template: 'qq-template-manual-trigger',
-            request: {
-                endpoint: '/server/uploads'
-            },
-            thumbnails: {
-                placeholders: {
-                    waitingPath: '/source/placeholders/waiting-generic.png',
-                    notAvailablePath: '/source/placeholders/not_available-generic.png'
-                }
-            },
-            autoUpload: false
-        });
 
-        $('#trigger-upload').click(function() {
-            $('#fine-uploader-manual-trigger').fineUploader('uploadStoredFiles');
-        });
+
+// $('#fine-uploader-manual-trigger').fineUploader({
+//             template: 'qq-template-manual-trigger',
+//             request: {
+//                 endpoint: '/server/uploads'
+//             },
+//             thumbnails: {
+//                 placeholders: {
+//                     waitingPath: '/source/placeholders/waiting-generic.png',
+//                     notAvailablePath: '/source/placeholders/not_available-generic.png'
+//                 }
+//             },
+//             autoUpload: false,
+
+//         });
+
+// $('#trigger-upload').click(function() {
+//             $('#fine-uploader-manual-trigger').fineUploader('uploadStoredFiles');
+// });
 
 
 // $(function () {

@@ -12,7 +12,7 @@ class PostsController extends AppController{
 		'users/add','index','view','jsonapi');
 	}
 
-	// 以下 public
+        // 以下 public
 	// ホームの表示
 	public function index()
 	{
