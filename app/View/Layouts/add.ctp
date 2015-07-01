@@ -9,7 +9,7 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 <!-- 	<?php echo $this->Html->script(array('uikit'));?>
  -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <?php echo $this->html->css(array('reset','fine-uploader-new','jquery.fileupload-ui','uikit','postsadd'));?>
@@ -26,9 +26,9 @@
                 <div class="qq-upload-button-selector qq-upload-button uk-button">
                     <div>ファイルを選ぶ</div>
                 </div>
-                <!-- <button type="button" id="trigger-upload" class="btn btn-primary">
+                <button type="button" id="trigger-upload" class="btn btn-primary">
                     <i class="icon-upload icon-white"></i> Upload
-                </button> -->
+                </button>
             </div>
             <span class="qq-drop-processing-selector qq-drop-processing">
                 <span>Processing dropped files...</span>
