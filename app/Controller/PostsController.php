@@ -97,7 +97,7 @@ class PostsController extends AppController{
 			'Post'=>array(
 				'MainTitle'=>$this->data['MainTitle'],
 				'SubTitle'=>$this->data['SubTitle'],
-				'MainImg'=>$mainimg_renamed,
+				'MainImg'=>$this->data['Img'][1],
 				'Images'=>$images,
 				'ImgComments'=>$ImgComments,
 				'BackgroundImage'=>$BackgroundImage_renamed,

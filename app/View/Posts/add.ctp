@@ -7,77 +7,60 @@
 </header><!-- /header -->
 <div class="uk-container">
     <h2 class="lead">あなたの旅行をまとめて下さい。</h2>
-   <!--  <?php echo $this->form->create('posts',array('type'=>'post','action'=>'imgadd','onsubmit'=>'retrun confirm("旅行記を公開します。よろしいでしょうか?");')); ?> -->
-
-<!--<?php echo $this->form->create('add',array('type'=>'post','class'=>'uk-form','id'=>'qq-form','onsubmit'=>'return confirm("旅行記を公開してもよろしいですか??")')); ?>-->
-
-<!--&lt;!&ndash; <form action="server/uploads.php" id="qq-form" class="uk-form">-->
- <!--&ndash;&gt;-->
-            <!--<input type="text" name="MainTitle" required class="uk-form text_ titles" placeholder="旅行記のタイトルを入れて下さい。">-->
-            <!--<br>-->
-
-            <!--<input type="text" name="SubTitle" required class="uk-form text_ titles" placeholder="旅行の感想、説明を教えて下さい。">-->
-<!--<div id="fine-uploader-manual-trigger"></div>-->
-<!--<input type="submit" value="Done" class="uk-width-1-1 submit uk-button uk-button-primary uk-button-large"-->
-<!--style="border:none;" id="qqform">-->
-   <!--</div>-->
-<?php echo $this->form->create(
-    'Post',
-    array('type'=>'post','action'=>'add','onsubmit'=>'retrun confrim("旅行記を公開します。よろしいでしょうか?")')
-);?>
-    <?php echo $this->form->type('Mai')?>
-<?php echo $this->form->text('MainTitle');?>
-<?php echo $this->form->end('保存');?>
-    <!--<form type="POST" >-->
-        <!--<input type="text" name="maintitle">-->
-        <!--<input type="file" name="photos[]" multiple>-->
-        <!--<input type="submit">-->
-    <!--</form>-->
 
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <?php echo $this->form->create('Post', array('type'=>'post','action'=>'add','onsubmit'=>'retrun confrim("旅行記を公開します。よろしいでしょうか?")'
+    ));?>
+    <?php echo $this->form->text('MainTitle');?>
+    <input type="file" name="file" onchange="preview(this);" multiple="multiplle"/><br>
+    <span style="font-size:small;">※ 複数ファイル選択可</span><br>
+    <br>
+    <div id="previewArea" style="width:90%; height:300px;">
+    <?php echo $this->form->end('保存');?>
+
+
+
 <script>
 
+    function preview (e) {
+        // ファイル未選択
+        if (!e.files.length) return;
+        // ファイルを1件ずつ処理する
+        var errMsg = "";
+        for (var i = 0; i < e.files.length; i++) {
+            var file = e.files[i];
+            // 想定したMIMEタイプでない場合には処理しない
+            if (!/^image\/(png|jpeg|gif)$/.test(file.type)) {
+                errMsg += "ファイル名: " + file.name + ", 実際のMIMEタイプ: " + file.type + "\n\n";
+                continue;
+            }
+            // Imageを作成
+            // imgとかfr変数は、ループごとに上書きされるので、
+            // onloadイベントで上書きされた変数にアクセスしないために
+            // fr.tmpImgなどに一時的にポインタを保存したり、
+            // onload関数内では、frやimgでなくthisでアクセスする。
+            var img = document.createElement('img');
+            var fr = new FileReader();
+            fr.tmpImg = img;
+            fr.onload = function () {
+                this.tmpImg.src = this.result;
+                this.tmpImg.onload = function () {
+                    document.getElementById('previewArea').appendChild(this);
+                }
+            }
+            // 画像読み込み
+            fr.readAsDataURL(file);
+        }
 
- $('#fine-uploader-manual-trigger').fineUploader({
-             template: 'qq-template-manual-trigger',
-             request: {
-                 endpoint: 'localhost/cakephp/posts/add'
-             },
-             thumbnails: {
-                 placeholders: {
-                     waitingPath: '/source/placeholders/waiting-generic.png',
-                     notAvailablePath: '/source/placeholders/not_available-generic.png'
-                 }
-             },
-             autoUpload: false,
-             uploadStoredFiles:true,
-                multiple:true
-
-         });
-
- $('#trigger-upload').click(function() {
-             $('#fine-uploader-manual-trigger').fineUploader('uploadStoredFiles');
- });
-
-
-// $(function () {
-//     $('#fileupload').fileupload({
-//         dataType: 'json',
-//         add: function (e, data) {
-//             data.context = $('<button/>').text('Upload')
-//                 .appendTo(document.body)
-//                 .click(function () {
-//                     data.context = $('<p/>').text('旅行記をアップロードしています。').replaceAll($(this));
-//                     data.submit();
-//                 });
-//         },
-//         done: function (e, data) {
-//             data.context.text('Upload finished.');
-//         }
-//     });
-// });
+        // エラーがあれば表示する
+        if (errMsg != "") {
+            errMsg = "以下ファイルはMIMEタイプが対応していません。\n"
+            + "MIMEタイプはimage/png, image/jpeg, image/gifのみ対応です。\n\n"
+            + errMsg;
+            alert(errMsg);
+        }
+    }
 </script>
 <style type="text/css" media="screen">
 	#jquery-ui-sortable{
@@ -87,4 +70,13 @@
 		background-color: black;
 		color: white;
 	}
+
+
+    .thumb {
+        height: 75px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
 </style>
+
+    </div>
