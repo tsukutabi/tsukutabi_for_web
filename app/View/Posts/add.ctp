@@ -1,27 +1,18 @@
-<!-- Force latest IE rendering engine or ChromeFrame if installed -->
-<!--[if IE]>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<![endif]-->
-<header id="header" class="uk-block-primary">
-    <h1>つくたび 記事作成ページ</h1>
-</header><!-- /header -->
-<div class="uk-container">
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    </div>
+</div>
+<div class="container">
+    <h1>jQuery File Upload Demo</h1>
+    <h2 class="lead">Basic Plus UI version</h2>
 
 
-    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+    <br>
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="fileupload" action="" method="POST" enctype="multipart/form-data">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
-        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-
-
-        <div class="form-group">
-            <label for="exampleInputEmail1">旅行記のタイトル</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email" name="Maintitle" required="required">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">旅行の概要 感想を教えて下さい。</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Subtitle" rows="3">
-        </div>
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
                 <!-- The fileinput-button span is used to style the file input field as button -->
@@ -69,9 +60,7 @@
                 <li>The maximum file size for uploads in this demo is <strong>999 KB</strong> (default file size is unlimited).</li>
                 <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
                 <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
-                <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
-                <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
-                <li>Built with the <a href="http://getbootstrap.com/">Bootstrap</a> CSS framework and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+
             </ul>
         </div>
     </div>
@@ -100,9 +89,6 @@
         <td>
             <p class="size">Processing...</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-        </td>
-        <td>
-            <input type="text" name="Comments[]" class="form-control">
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
@@ -164,34 +150,21 @@
     </tr>
 {% } %}
 </script>
-
-
-<?php echo $this->html->script(array('jquery.fileupload.js','jquery.iframe-transport','jquery.fileupload-process.js','jquery.fileupload-image.js','jquery.fileupload-video.js','jquery.fileupload-validate.js','jquery.fileupload-ui.js','uikit.js','main.js','vendor/jquery.ui.widget.js'));?>
-<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<?php echo $this->html->script('jquery.ui.widget.js');?>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- blueimp Gallery script -->
-<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<?php echo $this->html->script(array('jquery.iframe-transport','jquery.fileupload.js','jquery.fileupload-process.js','jquery.fileupload-image.js','jquery.fileupload-video.js','jquery.fileupload-validate.js','jquery.fileupload-ui.js','uikit.js','main.js','cors/jquery.xdr-transport.js'));?>
+<!-- The main application script -->
 
-
-<style type="text/css" media="screen">
-	#jquery-ui-sortable{
-		cursor:move;
-	}
-	#add-header{
-		background-color: black;
-		color: white;
-	}
-
-
-    .thumb {
-        height: 75px;
-        border: 1px solid #000;
-        margin: 10px 5px 0 0;
-    }
-</style>
-
+<![endif]-->

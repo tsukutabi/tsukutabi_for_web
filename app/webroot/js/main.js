@@ -18,15 +18,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        // ローカル用
-        url: 'imgadd/',
-        singleFileUploads:false,
-        // 本番用
-        // url: 'imgadd/,'
-        // console.log('success'),
-        sequentialUploads: true,
-        }).on('fileuploadsubmit', function (e, data) {
-        data.formData = data.context.find(':input').serializeArray();
+        url: 'server/php/'
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -55,11 +47,11 @@ $(function () {
         if ($.support.cors) {
             $.ajax({
                 url: '//jquery-file-upload.appspot.com/',
-                type: 'post'
+                type: 'HEAD'
             }).fail(function () {
                 $('<div class="alert alert-danger"/>')
                     .text('Upload server currently unavailable - ' +
-                            new Date())
+                    new Date())
                     .appendTo('#fileupload');
             });
         }
