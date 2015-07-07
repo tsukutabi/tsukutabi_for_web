@@ -6,62 +6,178 @@
     <h1>つくたび 記事作成ページ</h1>
 </header><!-- /header -->
 <div class="uk-container">
-    <h2 class="lead">あなたの旅行をまとめて下さい。</h2>
 
 
+    <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 
-    <?php echo $this->form->create('Post', array('type'=>'post','action'=>'add','onsubmit'=>'retrun confrim("旅行記を公開します。よろしいでしょうか?")'
-    ));?>
-    <?php echo $this->form->text('MainTitle');?>
-    <input type="file" name="file" onchange="preview(this);" multiple="multiplle"/><br>
-    <span style="font-size:small;">※ 複数ファイル選択可</span><br>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">旅行記のタイトル</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email" name="Maintitle" required="required">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">旅行の概要 感想を教えて下さい。</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Subtitle" rows="3">
+        </div>
+        <div class="row fileupload-buttonbar">
+            <div class="col-lg-7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="files[]" multiple>
+                </span>
+                <button type="submit" class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel upload</span>
+                </button>
+                <button type="button" class="btn btn-danger delete">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" class="toggle">
+                <!-- The global file processing state -->
+                <span class="fileupload-process"></span>
+            </div>
+            <!-- The global progress state -->
+            <div class="col-lg-5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+    </form>
     <br>
-    <div id="previewArea" style="width:90%; height:300px;">
-    <?php echo $this->form->end('保存');?>
-
-
-
-<script>
-
-    function preview (e) {
-        // ファイル未選択
-        if (!e.files.length) return;
-        // ファイルを1件ずつ処理する
-        var errMsg = "";
-        for (var i = 0; i < e.files.length; i++) {
-            var file = e.files[i];
-            // 想定したMIMEタイプでない場合には処理しない
-            if (!/^image\/(png|jpeg|gif)$/.test(file.type)) {
-                errMsg += "ファイル名: " + file.name + ", 実際のMIMEタイプ: " + file.type + "\n\n";
-                continue;
-            }
-            // Imageを作成
-            // imgとかfr変数は、ループごとに上書きされるので、
-            // onloadイベントで上書きされた変数にアクセスしないために
-            // fr.tmpImgなどに一時的にポインタを保存したり、
-            // onload関数内では、frやimgでなくthisでアクセスする。
-            var img = document.createElement('img');
-            var fr = new FileReader();
-            fr.tmpImg = img;
-            fr.onload = function () {
-                this.tmpImg.src = this.result;
-                this.tmpImg.onload = function () {
-                    document.getElementById('previewArea').appendChild(this);
-                }
-            }
-            // 画像読み込み
-            fr.readAsDataURL(file);
-        }
-
-        // エラーがあれば表示する
-        if (errMsg != "") {
-            errMsg = "以下ファイルはMIMEタイプが対応していません。\n"
-            + "MIMEタイプはimage/png, image/jpeg, image/gifのみ対応です。\n\n"
-            + errMsg;
-            alert(errMsg);
-        }
-    }
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Demo Notes</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>The maximum file size for uploads in this demo is <strong>999 KB</strong> (default file size is unlimited).</li>
+                <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
+                <li>Uploaded files will be deleted automatically after <strong>5 minutes or less</strong> (demo files are stored in memory).</li>
+                <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage (see <a href="https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support">Browser support</a>).</li>
+                <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
+                <li>Built with the <a href="http://getbootstrap.com/">Bootstrap</a> CSS framework and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- The blueimp Gallery widget -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            <input type="text" name="Comments[]" class="form-control">
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
 </script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+
+<?php echo $this->html->script(array('jquery.fileupload.js','jquery.iframe-transport','jquery.fileupload-process.js','jquery.fileupload-image.js','jquery.fileupload-video.js','jquery.fileupload-validate.js','jquery.fileupload-ui.js','uikit.js','main.js','vendor/jquery.ui.widget.js'));?>
+<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+
+
 <style type="text/css" media="screen">
 	#jquery-ui-sortable{
 		cursor:move;
@@ -79,4 +195,3 @@
     }
 </style>
 
-    </div>

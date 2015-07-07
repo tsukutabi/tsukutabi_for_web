@@ -42,6 +42,8 @@ class PostsController extends AppController{
 	$this->autoRender = false;
 	$this->layout = false;
 	$this->autoLayout = false;
+        $this->log($_POST,LOG_DEBUG);
+        $this->log($_FILES,LOG_DEBUG);
 	 if ($this->request->is('post')) {
 			$number = count($_FILES["files"]["tmp_name"]);
 		if ($number>59) {
@@ -86,6 +88,8 @@ class PostsController extends AppController{
 	}
 	public function add (){
 	$this->layout='add';
+        $this->log($_POST,LOG_DEBUG);
+        $this->log($_FILES,LOG_DEBUG);
 	$this->set('title_for_layout','つくたび作成ページ');
 	if ($this->request->is('post')) {
 		$this->log($_POST,LOG_DEBUG);

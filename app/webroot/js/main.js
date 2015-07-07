@@ -19,9 +19,10 @@ $(function () {
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         // ローカル用
-        url: 'localhost/cakephp/posts/imgadd/',
+        url: 'imgadd/',
+        singleFileUploads:false,
         // 本番用
-        // url: 'tsukutabi.com/posts/imgadd/,'
+        // url: 'imgadd/,'
         // console.log('success'),
         sequentialUploads: true,
         }).on('fileuploadsubmit', function (e, data) {
@@ -54,7 +55,7 @@ $(function () {
         if ($.support.cors) {
             $.ajax({
                 url: '//jquery-file-upload.appspot.com/',
-                type: 'HEAD'
+                type: 'post'
             }).fail(function () {
                 $('<div class="alert alert-danger"/>')
                     .text('Upload server currently unavailable - ' +
