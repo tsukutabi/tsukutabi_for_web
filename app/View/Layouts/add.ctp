@@ -6,8 +6,8 @@
 
 	<title><?php echo $title_for_layout?></title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+    <?php echo  $this->Html->script("plupload.full.min.js");?>
 
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -16,7 +16,7 @@
     <!-- blueimp Gallery styles -->
     <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <?php echo $this->html->css(array('jquery.fileupload','jquery.fileupload-ui'));?>
+    <?php echo $this->html->css(array('jquery.fileupload','jquery.fileupload-ui','uikit'));?>
 
     <!-- CSS adjustments for browsers with JavaScript disabled -->
     <noscript><link rel="stylesheet" href="cakephp/css/jquery.fileupload-noscript.css"></noscript>

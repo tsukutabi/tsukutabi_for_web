@@ -18,23 +18,31 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'server/php/'
+            url: 'localhost/cakephp/posts/imgadd/'
+
+
     });
 
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
-        'option',
+
+        'option',{
+            //singleFileUploads:false
+            sequentialUploads: false
+        },
         'redirect',
         window.location.href.replace(
             /\/[^\/]*$/,
             '/cors/result.html?%s'
         )
+
+
     );
 
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
-            url: '//jquery-file-upload.appspot.com/',
+            url: 'localhost/cakephp/posts/imgadd/',
             // Enable image resizing, except for Android and Opera,
             // which actually support image resizing, but fail to
             // send Blob objects via XHR requests:
@@ -46,7 +54,7 @@ $(function () {
         // Upload server status check for browsers with CORS support:
         if ($.support.cors) {
             $.ajax({
-                url: '//jquery-file-upload.appspot.com/',
+                url: 'localhost/cakephp/posts/imgadd',
                 type: 'HEAD'
             }).fail(function () {
                 $('<div class="alert alert-danger"/>')
