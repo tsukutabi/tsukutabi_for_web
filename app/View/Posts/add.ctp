@@ -1,3 +1,6 @@
+
+<?php echo $this->Html->script(array('jQuery.js')); ?>
+
 <style>
     .postaddmainh2{
         text-align: center;
@@ -9,14 +12,23 @@
         background: #eee;
         color: #333
     }
+
+    .none{
+        display: none;
+    }
+    #previewArea {
+        overflow: hidden;
+    }
+    #previewArea img{
+        width: 200px;
+        float: left;
+    }
+    
 </style>
 <?php echo $this->Html->css('jquery.ui.plupload.css'); ?>
+
 <nav class="navbar navbar-default"><h2 class="postaddmainh2">旅行記を作成して下さい。</h2></nav>
 
-
-<pre id="console"></pre>
-
-<?php echo $this->Html->script(array('jQuery.js','plupload.full.min.js','jquery.ui.plupload.js')); ?>
 
 
 <!--<form id="form" id="upload-form" method="post" enctype="multipart/form-data" onSubmit="return upload(this);">-->
@@ -29,110 +41,54 @@
     <!--<input type="submit" value="Submit" />-->
 <!--</form>-->
 
+<div class="container">
 
 <form id="upload-form" method="post" enctype="multipart/form-data" onSubmit="return upload(this);">
-    <input id="upload-form-file" name="userfile[]" size="27" type="file" accept="image/*;capture=camera" multiple/>
-    <br />
-    <input type="file" multiple name="userfile[]" id="new[1]">
-    <br />
+    <input type="text" class="form-control" placeholder="" name="MainTitle">
+    <br>
+    <input type="text" class="form-control" placeholder="" name="SubTitle">
+
+
+
+    <input id="upload-form-file" class="FormObservation" name="userfile[]" onchange="preview(this);" type="file" accept="image/*;capture=camera" multiple/>
+    <br>
+<div class="test">
+
+</div>
+
+    <div id="previewArea" style="width:90%; height:300px;">
+    </div>
+
+
     <input type="submit" name="submit" value="OK" />
 </form>
 
+
+</div>
 <script type="text/javascript">
-    // Initialize the widget when the DOM is ready
-    $(function() {
-        $("#uploader").plupload({
-            // General settings
-            runtimes : 'html5,flash,silverlight,html4',
-            url : "localhost/cakephp/posts/imgadd/",
+    $(function(){
 
-            // Maximum file size
-            max_file_size : '2mb',
+        $(document).on('change','.FormObservation', function() {
 
-            chunk_size: '1mb',
+//            後で file.input.type.valueが!nullな時に以下を実行する（未実装）
 
-            // Resize images on clientside if we can
-            resize : {
-                width : 200,
-                height : 200,
-                quality : 90,
-                crop: true // crop to exact dimensions
-            },
 
-            // Specify what files to browse for
-            filters : [
-                {title : "Image files", extensions : "jpg,gif,png"},
-                {title : "Zip files", extensions : "zip,avi"}
-            ],
+//
+                $('.test').append('<input type="file" name="userfile[]" multiple class="FormObservation" onchange="preview(this);">');
+            $(this).addClass("none");
 
-            // Rename files by clicking on their titles
-            rename: false,
 
-            file_data_name:"Img[]",
-
-            // Sort files
-            sortable: true,
-
-            // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
-            dragdrop: true,
-
-            // Views to activate
-            views: {
-                list: true,
-                thumbs: true, // Show thumbs
-                active: 'thumbs'
-            },
-
-            // Flash settings
-            flash_swf_url : '/plupload/js/Moxie.swf',
-
-            // Silverlight settings
-            silverlight_xap_url : '/plupload/js/Moxie.xap'
 
 
 
         });
 
-//        $('#form').submit(function(e) {
-//            // Files in queue upload them first
-//            if ($('#uploader').plupload('getFiles').length > 0) {
-//
-////                // When all files are uploaded submit form
-//                $('#uploader').on('complete', function() {
-//                    $('#form')[0].submit();
-//                });
-//
-////                $form = $('#form');
-////                fd = new FormData($form[0]);
-////                console.log(fd);
-////                $.ajax
-////                ('localhost/cakephp/posts/imgadd/',
-////                {
-////                    type: 'post',
-////                    processData: false,
-////                    contentType: false,
-////                    data: fd,
-////                    dataType: "json",
-////                    success: function(data) {
-////                        alert( data.message );
-////                        console.log(data);
-////                    },
-////                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-////                        console.log(fd);
-////                        console.log( "ERROR" );
-////                        console.log( textStatus );
-////                        console.log( errorThrown );
-////                    }
-////                });
-////                $('#uploader').plupload('start');
-//            } else {
-//                alert("You must have at least one file in the queue.");
-//            }
-//            return false; // Keep the form from submitting
-//        });
+
+
+    $('')
+
+
     });
-
-
     function upload(form) {
         $form = $('#upload-form');
         fd = new FormData($form[0]);
@@ -155,6 +111,49 @@
                     }
                 });
         return false;
+    }
+
+    function preview (e) {
+        // ファイル未選択
+        if (!e.files.length) return;
+        // ファイルを1件ずつ処理する
+        var errMsg = "";
+        for (var i = 0; i < e.files.length; i++) {
+            var file = e.files[i];
+            // 想定したMIMEタイプでない場合には処理しない
+            if (!/^image\/(png|jpeg|gif)$/.test(file.type)) {
+                errMsg += "ファイル名: " + file.name + ", 実際のMIMEタイプ: " + file.type + "\n\n";
+                continue;
+            }
+            // Imageを作成
+            // imgとかfr変数は、ループごとに上書きされるので、
+            // onloadイベントで上書きされた変数にアクセスしないために
+            // fr.tmpImgなどに一時的にポインタを保存したり、
+            // onload関数内では、frやimgでなくthisでアクセスする。
+            var img = document.createElement('img');
+
+            var fr = new FileReader();
+            fr.tmpImg = img;
+            fr.onload = function () {
+                this.tmpImg.src = this.result;
+                this.tmpImg.onload = function () {
+                    document.getElementById('previewArea').appendChild(this);
+
+//                    $(this).after('<input type="text" name="ImgComments[]">');
+
+                }
+            }
+            // 画像読み込み
+            fr.readAsDataURL(file);
+        }
+
+        // エラーがあれば表示する
+        if (errMsg != "") {
+            errMsg = "以下ファイルはMIMEタイプが対応していません。\n"
+            + "MIMEタイプはimage/png, image/jpeg, image/gifのみ対応です。\n\n"
+            + errMsg;
+            alert(errMsg);
+        }
     }
 
 </script>
