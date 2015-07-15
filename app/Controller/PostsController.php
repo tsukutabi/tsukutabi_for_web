@@ -1,6 +1,5 @@
 <?php
 App::uses('Folder','Utility','Session');
-App::import('Vendor', 'UploadHandler', array('file' => 'file.upload/UploadHandler.php'));
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
@@ -28,7 +27,6 @@ class PostsController extends AppController{
 		$this->set('NewPost',$this->Post->find(),30);
 		$this->set('title_for_layout','つくたび');
 	}
-
 	// ページの詳細を表示する。
 	public function view($id= null)
 	{
@@ -42,10 +40,6 @@ class PostsController extends AppController{
 	$this->autoRender = false;
 	$this->layout = false;
 	$this->autoLayout = false;
-        $this->log('img',LOG_DEBUG);
-        $this->log($_POST,LOG_DEBUG);
-        $this->log($_FILES,LOG_DEBUG);
-        $this->log('img',LOG_DEBUG);
 	 if ($this->request->is('post')) {
 			$number = count($_FILES["files"]["tmp_name"]);
 		if ($number>59) {
@@ -53,19 +47,22 @@ class PostsController extends AppController{
 		}
 		for ($i=0; $i <$number; $i++){
 		list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['files']['tmp_name'][$i]);
-		switch($mime_type[$i]){
-			case IMAGETYPE_JPEG:
-				$img_extension[$i] = "jpg";
-					break;
-			case IMAGETYPE_PNG:
-				$img_extension[$i] = "png";
-					break;
-			case IMAGETYPE_GIF:
-				$img_extension[$i] = "gif";
-					break;
-			default:
-			echo h('この拡張子はサポートしておりません。');
-		}
+
+
+		checkmime($mime_type[$i]);
+		// switch($mime_type[$i]){
+		// 	case IMAGETYPE_JPEG:
+		// 		$img_extension[$i] = "jpg";
+		// 			break;
+		// 	case IMAGETYPE_PNG:
+		// 		$img_extension[$i] = "png";
+		// 			break;
+		// 	case IMAGETYPE_GIF:
+		// 		$img_extension[$i] = "gif";
+		// 			break;
+		// 	default:
+		// 	echo h('この拡張子はサポートしておりません。');
+		// }
 		$type =$img_extension[$i];
 		$image["imgname$i"]= md5(microtime()).".$type";
 		$uploadfile = IMAGES . $image["imgname$i"];
@@ -88,19 +85,29 @@ class PostsController extends AppController{
 		}
 		throw new MethodNotAllowedException('エラー');
 	}
+
 	public function add (){
 	$this->layout='add';
-        $this->log($_POST,LOG_DEBUG);
-        $this->log($_FILES,LOG_DEBUG);
-
 	$this->set('title_for_layout','つくたび作成ページ');
-	if ($this->request->is('post')) {
+	$this->set('userid',$this->Session->read('Auth.User.id'));
+	if ($this->request->is('post')){
 		$this->log($_POST,LOG_DEBUG);
+		$this->log($_FILES,LOG_DEBUG);
 		$this->Post->create();
+		// ファイル数のチェック80枚以下はエラー
 
-		$number = count($_FILES["userfile"]["tmp_name"]);
+		$number = count($_FILES["photos"]["tmp_name"]);
+		$this->log($number,LOG_DEBUG);
 
-		$database =array(
+		if ($number>80) {
+			$this->Session->setFlash('');
+			return 0;
+		}
+
+//		画像のmimetypeの判定
+
+
+			$database =array(
 			'Post'=>array(
 				'MainTitle'=>$this->data['MainTitle'],
 				'SubTitle'=>$this->data['SubTitle'],
@@ -111,8 +118,16 @@ class PostsController extends AppController{
 				)
 			);
 		$this->Post->save($database);
+
+		$this->redirect(array(
+				'controller'=>'users',
+				'view'=>''
+			));
+
+
+
 	}// is(post)の閉じタグ
-		// throw new MethodNotAllowedException('エラー');
+		 // throw new MethodNotAllowedException('POSTでアクセスして下さい。');
 	} //add functionのとじタグ
 
 	public function contents($bgimgname ) {
