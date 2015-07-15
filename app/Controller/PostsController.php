@@ -90,6 +90,7 @@ class PostsController extends AppController{
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
 	$this->set('userid',$this->Session->read('Auth.User.id'));
+
 	if ($this->request->is('post')){
 		$this->log($_POST,LOG_DEBUG);
 		$this->log($_FILES,LOG_DEBUG);
@@ -98,13 +99,19 @@ class PostsController extends AppController{
 
 		$number = count($_FILES["photos"]["tmp_name"]);
 		$this->log($number,LOG_DEBUG);
+//
+//		if ($number>80) {
+//			$this->Session->setFlash('');
+//			return 0;
+//		}
+//
+//        //		画像のmimetypeの判定
 
-		if ($number>80) {
-			$this->Session->setFlash('');
-			return 0;
-		}
-
-//		画像のmimetypeの判定
+//        for ($i=0; $i <$number; $i++){
+//
+//        }
+//
+//
 
 
 			$database =array(

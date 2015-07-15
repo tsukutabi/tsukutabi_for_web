@@ -7,15 +7,15 @@ class Posts extends AppModel
 {
 	public $belongsTo = 'User';
 	public $hasMany = "Comment";
-
-
 	public $validate = array(
 			'MainTitle'=>array(
-			'notEmpty'=>'true',
-			// 'between'==>array($min)
+				'rule'=>array('between',3,300)
 				),
 			'SubTitle'=>array(
-				)
+				'rule'=>array('between',3,300),
+				'message'=>'文字数は3文字以上300文字以内にして下さい。'
+				),
+				'notEmpty'=>true,
 		);
 	public function checkmime($mime_type)
 	{

@@ -2,19 +2,15 @@
 
 <?php echo $this->Html->css('jquery.ui.plupload.css'); ?>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-
-
 <style>
     .postaddmainh2{
         text-align: center;
         font-size: medium;
     }
-
     body{
         font: 13px Verdana;
         color: #333
     }
-
     .none{
         display: none;
     }
@@ -43,6 +39,14 @@
     .kiyaku{
     width: 65%;
     }
+    .input_data{
+        overflow: hidden;
+        margin-bottom: 140px;
+    }
+    .datas{
+        float: left;
+        width: 45%;
+    }
 </style>
 
 
@@ -57,18 +61,26 @@
         <!--<script src="../js/fileinput_locale_es.js" type="text/javascript"></script>-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
 
-    <?php echo  $this->Html->script(array("plupload.full.min.js","fileinput.min.js"));?>
+    <?php echo  $this->Html->script("fileinput.min.js");?>
     <?php echo $this->Html->css("fileinput.min");?>
 
 <form enctype="multipart/form-data" id="upload-form" method="post">
-    <input type="text" name="MainTitle" class="form-control" placeholder="" id="Main" required="true"><br>
-    <input type="text" name="SubTitle" class="form-control" placeholder="" id="Sub" required><br>
+    <input type="text" name="MainTitle" class="form-control" placeholder="旅行記のタイトル" id="Main" required="true"><br>
+    <input type="text" name="SubTitle" class="form-control" placeholder="旅の概要を教えて下さい。" id="Sub" required><br>
     <input type="hidden" name="user_id" value='<?php echo "$userid";?>'>
-    <input type="date">
+
+    <br>
+    <div class="input_data">
+    <p class="for_data datas">
+        出発日を教えて下さい。
+    <input type="date"></p>
+    <p class="arrival_data datas">到着日を教えて下さい。
+    <input type="date"></p>
+    </div>
     <div class="form-group">
         <input  id="input-id" name="photos[]" class="file" type="file" multiple data-preview-file-type="any"  data-preview-file-icon="" >
     </div>
-    <input type="submit"  class="btn btn-link btn-lg send_btn" confirm>
+    <input type="submit"  class="btn btn-link btn-lg send_btn" onSubmit="return checkSubmit()">
     <br>
 </form>
     <script>
@@ -83,6 +95,15 @@
 //            Sub =$("#Sub").val();
 //
 //        }))
+
+function checkSubmit(){
+    if(window.confirm('旅行記を公開してよろしいですか？')){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
         $("#input-id").fileinput({
             uploadUrl: 'localhost/cakephp/posts/add',
