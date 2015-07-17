@@ -90,50 +90,48 @@ class PostsController extends AppController{
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
 	$this->set('userid',$this->Session->read('Auth.User.id'));
-
 	if ($this->request->is('post')){
 		$this->log($_POST,LOG_DEBUG);
 		$this->log($_FILES,LOG_DEBUG);
 		$this->Post->create();
 		// ファイル数のチェック80枚以下はエラー
-
 		$number = count($_FILES["photos"]["tmp_name"]);
 		$this->log($number,LOG_DEBUG);
-//
-//		if ($number>80) {
-//			$this->Session->setFlash('');
-//			return 0;
-//		}
-//
-//        //		画像のmimetypeの判定
-
-//        for ($i=0; $i <$number; $i++){
-//
-//        }
-//
-//
-
-
+		if ($number>80) {
+			$this->Session->setFlash('');
+			return 0;
+		}
+//        		画像のmimetypeの判定とリネーム アップロードの処理
+        for ($i=0; $i <$number; $i++){
+            list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['photos']['tmp_name'][$i]);
+            $img_extension[i]=$this->Post->checkmime($mime_type[$i]);
+            $image["imgname$i"]= md5(microtime()).".$img_extension[i]";
+//            $uploadfile = IMAGES . $image["imgname$i"];
+            move_uploaded_file($_FILES['photos']['tmp_name'][$i],IMAGES . $image["imgname$i"]);
+        }
+//        アップロードされた画像の名前を結合する
+        $savedimages = implode(",",$image);
+        $comments=$this->data['photocomments'];
+        $ImgComments = implode(",",$comments);
 			$database =array(
 			'Post'=>array(
 				'MainTitle'=>$this->data['MainTitle'],
 				'SubTitle'=>$this->data['SubTitle'],
-				'MainImg'=>$this->data['Img'][1],
-				'Images'=>$images,
+				'MainImg'=>$this->data['photos'][1],
+				'Images'=>$savedimages,
 				'ImgComments'=>$ImgComments,
 				'BackgroundImage'=>$BackgroundImage_renamed,
 				)
 			);
-		$this->Post->save($database);
-
-		$this->redirect(array(
-				'controller'=>'users',
-				'view'=>''
-			));
-
-
-
-	}// is(post)の閉じタグ
+		 if($this->Post->save($database)){
+            $this->Session->setFlash('保存が完了しました。');
+             $this->redirect(array(
+                 'controller'=>'users',
+                 'view'=>'view',
+//                 'id'=>
+             ));
+         }
+    }// is(post)の閉じタグ
 		 // throw new MethodNotAllowedException('POSTでアクセスして下さい。');
 	} //add functionのとじタグ
 
@@ -184,14 +182,14 @@ class PostsController extends AppController{
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-			if($this->Post->delete($id)){
+			if(MatchUserIdtoPostsUser){
+                $this->Post->delete($id);
 			    $this->Session->setFlash(__(' id: %s は削除されました。', h($id)));
 		        return $this->redirect(array('action' => 'index'));
 		    }
 		}
 
 	// お気に入り登録機能
-	// ajaxでpostされる。
 	public function fav($id){
 		//getとかはエラー
 		if ($this->request->is('ajax') && $this->request->is('post')){
