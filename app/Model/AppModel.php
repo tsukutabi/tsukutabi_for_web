@@ -30,4 +30,17 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    public function checkmime($mime_type)
+    {
+        if(IMAGETYPE_JPEG == $mime_type){
+            $img_extension = "jpg";
+        }elseif( IMAGETYPE_PNG == $mime_type){
+            $img_extension = "png";
+        }elseif( IMAGETYPE_GIF == $mime_type){
+            $img_extension = "gif";
+        }else{
+            $img_extension = null;
+        }
+        return $img_extension;
+    }
 }

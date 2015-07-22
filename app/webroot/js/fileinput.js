@@ -218,7 +218,7 @@
             uploadIcon: '<i class="glyphicon glyphicon-upload text-info"></i>',
             uploadClass: 'btn btn-xs btn-default',
             uploadTitle: 'Upload file',
-            indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i>',
+            indicatorNew: '<i class="glyphicon glyphicon-hand-down text-warning"></i><input type="text" name="photocomments[]" class="form-control">',
             indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign file-icon-large text-success"></i>',
             indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>',
             indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>',
@@ -2250,7 +2250,7 @@
         msgImageHeightSmall: 'Height of image file "{name}" must be at least {size} px.',
         msgImageWidthLarge: 'Width of image file "{name}" cannot exceed {size} px.',
         msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.',
-        dropZoneTitle: 'Drag & drop files here &hellip;'
+        dropZoneTitle: '画像をドラッグアンドドロップして下さい。'
     };
 
     $.extend($.fn.fileinput.defaults, $.fn.fileinputLocales.en);

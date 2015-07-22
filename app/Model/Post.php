@@ -3,7 +3,7 @@
 * posts用のmodelですよっと
 *
 */
-class Posts extends AppModel
+class Post extends AppModel
 {
 	public $belongsTo = 'User';
 	public $hasMany = "Comment";
@@ -17,19 +17,7 @@ class Posts extends AppModel
 				),
 				'notEmpty'=>true,
 		);
-	public function checkmime($mime_type)
-	{
-        if(IMAGETYPE_JPEG == $mime_type){
-            $img_extension = "jpg";
-        }elseif( IMAGETYPE_PNG == $mime_type){
-            $img_extension = "png";
-        }elseif( IMAGETYPE_GIF == $mime_type){
-            $img_extension = "gif";
-        }else{
-            $img_extension = null;
-        }
-            return $img_extension;
-	}
+
     public function MatchUserIdtoPostsUser($postsUserid){
         $userid = $this->Sesion->read('Auth.User.username');
 

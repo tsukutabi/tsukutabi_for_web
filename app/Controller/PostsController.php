@@ -104,8 +104,8 @@ class PostsController extends AppController{
 //        		画像のmimetypeの判定とリネーム アップロードの処理
         for ($i=0; $i <$number; $i++){
             list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['photos']['tmp_name'][$i]);
-            $img_extension[i]=$this->Post->checkmime($mime_type[$i]);
-            $image["imgname$i"]= md5(microtime()).".$img_extension[i]";
+            $img_extension[$i]=$this->Post->checkmime($mime_type[$i]);
+            $image["imgname$i"]= md5(microtime()).".$img_extension[$i]";
 //            $uploadfile = IMAGES . $image["imgname$i"];
             move_uploaded_file($_FILES['photos']['tmp_name'][$i],IMAGES . $image["imgname$i"]);
         }
@@ -117,17 +117,18 @@ class PostsController extends AppController{
 			'Post'=>array(
 				'MainTitle'=>$this->data['MainTitle'],
 				'SubTitle'=>$this->data['SubTitle'],
-				'MainImg'=>$this->data['photos'][1],
+				'MainImg'=>IMAGES.$image["imgname0"],
 				'Images'=>$savedimages,
+                'user_id'=>$this->Session->read('Auth.User.id'),
 				'ImgComments'=>$ImgComments,
-				'BackgroundImage'=>$BackgroundImage_renamed,
+//				'BackgroundImage'=>$BackgroundImage_renamed,
 				)
 			);
 		 if($this->Post->save($database)){
             $this->Session->setFlash('保存が完了しました。');
              $this->redirect(array(
-                 'controller'=>'users',
-                 'view'=>'view',
+                 'controller'=>'posts',
+                 'view'=>'index',
 //                 'id'=>
              ));
          }
