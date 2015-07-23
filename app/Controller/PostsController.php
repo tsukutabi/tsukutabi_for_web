@@ -15,6 +15,7 @@ class PostsController extends AppController{
 	// ホームの表示
 	public function index()
 	{
+        $this->set('title_for_layout','do travel,share it');
 		$params = array(
 			// 15件取る
 			'order' => 'modified desc','limit' =>'15'
@@ -25,13 +26,16 @@ class PostsController extends AppController{
 		$this->set('posts',$this->Post->find('all'));
 		// 新着のデータ
 		$this->set('NewPost',$this->Post->find(),30);
-		$this->set('title_for_layout','つくたび');
 	}
 	// ページの詳細を表示する。
 	public function view($id= null)
 	{
+        $sqlfortitle = 'select MainTitle from posts where id ="$id"';
+        $this->set('title_for_layout',$this->Post->query($sqlfortitle));
+        $this->set('user_id',$this->Session->read('Auth.User.id'));
 		$this->Post->id=$id;
 		$this->set('post',$this->Post->read());
+
 	}
 
 	// 旅行記の作成

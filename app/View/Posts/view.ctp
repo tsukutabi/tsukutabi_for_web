@@ -41,11 +41,19 @@ jQuery(function($){
   }());
 });
 </script>
+
 <h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?></h1>
 <div class="edit">
-<?php echo $this->Html->link('編集',array('action'=>'edit',$post['Post']['id']));?>
-    <?php echo $this->Form->postLink('削除',array('action'=>'delete',$post['Post']['id']),array('confirm'=>'削除してもよろしいですか?')); ?>
+<?php if($post['Post']['user_id']==$user_id){
+    echo $this->Html->link('編集',array('action'=>'edit',$post['Post']['id']));
+    echo $this->Form->postLink('削除',array('action'=>'delete',$post['Post']['id']),array('confirm'=>'削除してもよろしいですか?'));
+}?>
 </div>
+
+
+
+
+
 <p><?php echo h($post['Post']['SubTitle']);?></p>
 <?php $images = explode(',',$post['Post']['Images'])?>
 <?php print_r($images)?>
