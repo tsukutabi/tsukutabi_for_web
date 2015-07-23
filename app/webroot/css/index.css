@@ -183,6 +183,24 @@ a {
 }
 
 
+ #container li a {
+    font-size: 14px;
+}
+
+li .title{
+     font-size: 14px;
+ }
+
+.main_tiles{
+    overflow: hidden;
+}
+
+.main_tiles p{
+    float: left;
+}
+.main_tiles a{
+    float: right;
+}
 
 /*===============================================
 ●style.css 画面の横幅が769px以上
@@ -322,7 +340,7 @@ a {
 }
 
 .center-nav{
-    margin-left:140px;
+    margin-left:70px;
 }
 
 }
