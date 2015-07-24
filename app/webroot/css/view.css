@@ -4,7 +4,7 @@
 /* Example wrapper */
 .wrap {
   position: relative;
-  margin: 3em 0;
+  /*margin: 3em 0;*/
 }
 
 /* Frame */
@@ -45,7 +45,7 @@
 }
 .scrollbar .handle {
   width: 100px;
-  height: 10px;
+  height: 3px;
   background: #292a33;
   cursor: pointer;
 }
@@ -103,6 +103,7 @@
 .h1{
   font-size: 30px;
   text-align: center;
+    margin: 5px;
 }
 
 .edit{
@@ -110,7 +111,7 @@
 }
 
 .controls{
-    margin:70px 450px;
+    margin:5px 450px;
 }
 
 .controls button{
@@ -128,5 +129,19 @@
   width: 500px;
 }
 
+.Comment{
+    width: 80%;
+    color: #843534;
+    font-size: 14px;
+}
+@media screen and (min-width: 769px) {
 
+    .h1{
+    margin: 5px 140px;
+    }
+    .SubTitle{
+        margin-top: -34px;
+    }
+
+}
 

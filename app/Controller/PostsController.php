@@ -30,66 +30,17 @@ class PostsController extends AppController{
 	// ページの詳細を表示する。
 	public function view($id= null)
 	{
-        $sqlfortitle = 'select MainTitle from posts where id ="$id"';
-        $this->set('title_for_layout',$this->Post->query($sqlfortitle));
+        $sqlfortitle = "select MainTitle from posts where id = $id";
+        $a=$this->Post->query($sqlfortitle);
+        $b=$a[0]['posts']['MainTitle'];
+        $this->set('title_for_layout',$b);
+
         $this->set('user_id',$this->Session->read('Auth.User.id'));
 		$this->Post->id=$id;
 		$this->set('post',$this->Post->read());
 
 	}
-
 	// 旅行記の作成
-	public function imgadd (){
-	// $this->set('title_for_layout','つくたび_旅行記作成ページ');
-	$this->autoRender = false;
-	$this->layout = false;
-	$this->autoLayout = false;
-	 if ($this->request->is('post')) {
-			$number = count($_FILES["files"]["tmp_name"]);
-		if ($number>59) {
-			$this->Session->setFlash('アップロードする画像は60枚以下にして下さい。');
-		}
-		for ($i=0; $i <$number; $i++){
-		list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['files']['tmp_name'][$i]);
-
-
-		checkmime($mime_type[$i]);
-		// switch($mime_type[$i]){
-		// 	case IMAGETYPE_JPEG:
-		// 		$img_extension[$i] = "jpg";
-		// 			break;
-		// 	case IMAGETYPE_PNG:
-		// 		$img_extension[$i] = "png";
-		// 			break;
-		// 	case IMAGETYPE_GIF:
-		// 		$img_extension[$i] = "gif";
-		// 			break;
-		// 	default:
-		// 	echo h('この拡張子はサポートしておりません。');
-		// }
-		$type =$img_extension[$i];
-		$image["imgname$i"]= md5(microtime()).".$type";
-		$uploadfile = IMAGES . $image["imgname$i"];
-		$this->log($uploadfile,LOG_DEBUG);
-		$result = move_uploaded_file($_FILES['userfile']['tmp_name'][$i],$uploadfile);
-	};
-	// forここまで
-	$imagename = implode(",", $image);
- 	$basedata = array(
-		'Post' => array(
-		'title'=>$this->data['MainTitle'],
-		'subtitle'=>$this->data['SubTitle'],
-		'body'=>$this->data['body'][0],
-		'mainimg'=>$image['imgname0'],
-		'bodies'=>$bodies,
-		'images'=>$imagename,
-				)
-			);
-		$this->Post->save($basedata);
-		}
-		throw new MethodNotAllowedException('エラー');
-	}
-
 	public function add (){
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
@@ -102,7 +53,7 @@ class PostsController extends AppController{
 		$number = count($_FILES["photos"]["tmp_name"]);
 		$this->log($number,LOG_DEBUG);
 		if ($number>80) {
-			$this->Session->setFlash('');
+			$this->Session->setFlash('画像の枚数は80枚以内にして下さい');
 			return 0;
 		}
 //        		画像のmimetypeの判定とリネーム アップロードの処理
@@ -110,8 +61,9 @@ class PostsController extends AppController{
             list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['photos']['tmp_name'][$i]);
             $img_extension[$i]=$this->Post->checkmime($mime_type[$i]);
             $image["imgname$i"]= md5(microtime()).".$img_extension[$i]";
+
 //            $uploadfile = IMAGES . $image["imgname$i"];
-            move_uploaded_file($_FILES['photos']['tmp_name'][$i],IMAGES . $image["imgname$i"]);
+            move_uploaded_file($_FILES['photos']['tmp_name'][$i],IMAGES.$image["imgname$i"]);
         }
 //        アップロードされた画像の名前を結合する
         $savedimages = implode(",",$image);
@@ -121,7 +73,7 @@ class PostsController extends AppController{
 			'Post'=>array(
 				'MainTitle'=>$this->data['MainTitle'],
 				'SubTitle'=>$this->data['SubTitle'],
-				'MainImg'=>IMAGES.$image["imgname0"],
+				'MainImg'=>$image["imgname0"],
 				'Images'=>$savedimages,
                 'user_id'=>$this->Session->read('Auth.User.id'),
 				'ImgComments'=>$ImgComments,

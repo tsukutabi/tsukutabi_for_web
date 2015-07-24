@@ -45,7 +45,7 @@ function checkSubmit(){
 }
         $("#input-id").fileinput({
             uploadUrl: 'localhost/cakephp/posts/add',
-            allowedFileExtensions : ['jpg', 'png','gif'],
+            allowedFileExtensions : ['jpg', 'png','gif','jpeg'],
             multiple:true,
             uploadAsync:false,
             previewFileType:'any',
