@@ -61,11 +61,9 @@ jQuery(function($){
                 </p>
             <?php endforeach;?>
             <input type="text" class="Comment">
-
+            <input type="submit" class="CommentSubmit">
         </li>
-
         <?php
-
 $images = explode(',',$post['Post']['Images']);
 foreach ($images as  $value) {
 	echo '<li><img class="slider" src="/cakephp/img/'.$value;
@@ -73,13 +71,8 @@ foreach ($images as  $value) {
 }
 ?>
         <li>
-
-        </li>
-
-        <li>
        <p>written by <?php echo $post['User']['username']; ?></p>
-
-    </li>
+        </li>
 </ul>
 </div>
     <div class="controls center">
