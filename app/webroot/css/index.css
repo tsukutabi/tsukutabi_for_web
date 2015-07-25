@@ -1,0 +1,353 @@
+.tiles{
+  overflow: hidden;
+}
+
+.uk-modal-header .textcenter{
+  text-align:center;
+}
+
+body {
+    background-color: #e5e5e5;
+    font-family: "Helvetica Neue Light", "Helvetica Neue", Arial, sans-serif;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+    margin: 30px 0 10px 0;
+}
+
+header p {
+    text-align: center;
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+    font-weight: 200;
+}
+
+a {
+    text-decoration: none;
+}
+
+/**
+ * Progress bar for imagesLoaded
+ */
+.progress-bar {
+    background-color: #0BC20B;
+    height: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 0;
+    -webkit-box-shadow: 0 1px 3px rgba(11, 194, 11, 0.2);
+    -moz-box-shadow: 0 1px 3px rgba(11, 194, 11, 0.2);
+    box-shadow: 0 1px 3px rgba(11, 194, 11, 0.2);
+    -webkit-transition: width 0.1s ease-out;
+    -moz-transition: width 0.1s ease-out;
+    -o-transition: width 0.1s ease-out;
+    transition: width 0.1s ease-out;
+}
+
+/**
+ * Placerholder css
+ */
+.wookmark-placeholder {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #eee;
+    border: 1px solid #dedede;
+    z-index: -1;
+}
+
+/**
+ * Grid container
+ */
+.tiles-wrap {
+    position: relative; /** Needed to ensure items are laid out relative to this container **/
+    margin: 10px 0;
+    padding: 0;
+    list-style-type: none;
+    display: none;
+}
+
+
+/**
+ * Grid items
+ */
+.tiles-wrap li {
+    display: block;
+    opacity: 1;
+    text-align: center;
+    list-style-type: none;
+    background-color: #fff;
+    float: left;
+    cursor: pointer;
+    width: 200px;
+    padding: 4px;
+    border: 1px solid #dedede;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+.tiles-wrap.animated li {
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.tiles-wrap li.wookmark-inactive {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.tiles-wrap li:hover {
+    background-color: #fafafa;
+}
+
+.tiles-wrap img {
+    display: block;
+}
+
+.tiles-wrap a {
+    color: #555;
+    text-align: center;
+    /* display: table-cell; */
+    width: 200px;
+    height: 200px;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tile-loading:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #ddd;
+    content: "Loading\2026";
+    padding-top: 20px;
+    color: #999;
+}
+
+/**
+ * Filters
+ */
+#filters {
+    list-style-type: none;
+    text-align: center;
+    margin: 0 5% 0 5%;
+}
+
+#filters:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+#filters li {
+    font-size: 12px;
+    float: left;
+    padding: 6px 8px 4px;
+    cursor: pointer;
+    margin: 0 10px;
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    -o-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#filters li:hover {
+    background: #4281f5;
+    color: #ffffff;
+}
+
+#filters li.active {
+    background: #4281f5;
+    color: #ffffff;
+}
+
+
+ #container li a {
+    font-size: 14px;
+}
+
+li .title{
+     font-size: 14px;
+ }
+
+.main_tiles{
+    overflow: hidden;
+}
+
+.main_tiles p{
+    float: left;
+}
+.main_tiles a{
+    float: right;
+}
+
+/*===============================================
+●style.css 画面の横幅が769px以上
+===============================================*/
+@media screen and (min-width: 769px) {
+  .main_p {
+    font-size: 30px;
+    color: #f0f0f0;
+    position: absolute;
+    z-index: 100;
+    top: 280px;
+    margin-left: 39%;
+  }
+  .main_h1 {
+    font-size: 100px;
+    color: #f0f0f0;
+    position: absolute;
+    z-index: 100;
+    top: 110px;
+    margin-left: 33%;
+  }
+  .article ul {
+    margin-left: -78px;
+  }
+  .posts {
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    width: 20%;
+    height: 350px;
+    margin-left: 5%;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  .posts:hover {
+    background-color: #f1f1f1;
+  }
+
+  .post img{
+    width: 212px;
+  }
+
+  .SerchArticle{
+    position: absolute;
+    z-index: 100;
+    top: 243px;
+    margin-left: 38%;
+  }
+  .SerchArticle .SerchInput{
+    background-color: rgba(15,15,15,0.3);
+    border:1px solid black;
+    border-radius:4px;
+    width:253px;
+    text-align:center;
+  }
+}
+/*===============================================
+●tablet.css 画面の横幅が768pxまで
+===============================================*/
+@media screen and (max-width: 768px) {
+  img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+}
+/*===============================================
+●smart.css  画面の横幅が640pxまで
+===============================================*/
+@media screen and (max-width: 640px) {
+  img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+  #container {
+    width: 100%;
+  }
+}
+
+
+
+@media screen and (min-width: 769px) {
+
+.tiles {
+  margin:20px 150px;
+}
+
+.tiles .posts{
+  float: left;
+  width: 20%;
+  box-shadow: ;
+  margin:20px;
+  height: 350px;
+  border-radius: 4px ;
+  border: 1px solid black;
+
+}
+
+.posts .title{
+  font-size: 17px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.posts .body{
+  font-size: 10px;
+  text-overflow: clip;
+}
+
+#footer{
+    height: 200px;
+}
+
+#footer p{
+  text-align: center;
+  color: white;
+  margin-top: 160px;
+}
+
+#top_nav{
+    overflow: hidden;
+}
+
+
+#top_nav .bar .left_ul li{
+    float: left;
+}
+
+#top_nav .right{
+    float: left;
+}
+
+.center-nav{
+    margin-left:70px;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+/* ここにスタイルを記述 */
+}
+@media screen and (max-width: 640px) {
+/* ここにスタイルを記述 */
+}

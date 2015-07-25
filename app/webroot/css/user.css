@@ -1,0 +1,61 @@
+body { background-image: url("http://bqworks.com/slider-pro/images/image2_medium.jpg");
+  background-size: cover;}
+.MainContainer {
+	margin-top: 150px;
+  text-align: center;
+  /* padding-top: 160px; */
+  border: white 1px solid;
+  width: 400px;
+  margin: 160px auto;
+  background-color: #BBB5B1;
+  border-radius: 6px;
+  height: 260px;
+}
+
+
+
+h2{
+  margin-top:120px;
+}
+
+.users-h2{
+  color:white;
+}
+
+
+.another-panel{
+  margin:auto;
+  margin-top:30px;
+  width:250px;
+}
+
+
+
+.flashMessage{
+  margin:auto;
+  width:400px;
+  margin-top:30px;
+
+}
+
+
+
+.users-password{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
