@@ -54,8 +54,18 @@ jQuery(function($){
 </div>
 <div class="frame effects" id="effects" >
     <ul class="clearfix">
-        <li id="time_titles"><input type="text" class="Comment"></li>
-<?php
+        <li id="time_titles">
+            <?php foreach ($post['Comment'] as $comment): ?>
+                <p class="UserComment">
+        <?php echo h($comment['body']);?> by <?php echo h($comment['commenter']); ?>
+                </p>
+            <?php endforeach;?>
+            <input type="text" class="Comment">
+
+        </li>
+
+        <?php
+
 $images = explode(',',$post['Post']['Images']);
 foreach ($images as  $value) {
 	echo '<li><img class="slider" src="/cakephp/img/'.$value;
