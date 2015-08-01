@@ -21,7 +21,7 @@
         <p class="arrival_data datas">到着日を教えて下さい。<input type="date" name="BackData"></p>
     </div>
 
-    <input type="text" name="tags[]" class="form-control" placeholder="旅行記の特徴を教えて下さい。" id="Tags" required="true"><br>
+    
     <div class="form-group">
         <input  id="input-id" name="photos[]" class="file" type="file" multiple data-preview-file-type="any"  data-preview-file-icon="" >
     </div>
@@ -29,20 +29,6 @@
     <br>
 </form>
     <script>
-//        $('#Main').on("change",(function(){
-//             Main =$("#Main").val();
-//        }))
-//        $('#Sub').on("change",(function(){
-//            Sub =$("#Sub").val();
-//        }))
-function checkSubmit(){
-    if(window.confirm('旅行記を公開してよろしいですか？')){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
         $("#input-id").fileinput({
             uploadUrl: 'localhost/cakephp/posts/add',
             allowedFileExtensions : ['jpg', 'png','gif','jpeg'],
@@ -56,13 +42,7 @@ function checkSubmit(){
                     User_Id:'<?php echo "$userid";?>'
                 }
         });
-//     監視しておいて 生成さらたらaddClassして そこから飛ばす??
-//        )
-//
-//        $('#input-id').on('filebatchpreupload', function(event, data, previewId, index) {
-//            var form = data.form, files = data.files, extra = data.extra,
-//                  response = data.response, reader = data.reader;
-//        });
+
     </script>
 <footer class="PostsAddFooter">
 <div class="list-group kiyaku">

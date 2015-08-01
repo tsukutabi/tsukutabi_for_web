@@ -9,7 +9,33 @@
 body {
     background-color: #e5e5e5;
     font-family: "Helvetica Neue Light", "Helvetica Neue", Arial, sans-serif;
+    height:100%;
 }
+
+html{
+    height: 100%;
+}
+
+/*footerをしたに貼り付けるための工夫*/
+
+#wrap{
+    width: 100%;
+    position: relative;
+    height:auto !important; /*IE6対策*/
+    height: 100%; /*IE6対策*/
+    min-height: 100%;
+}
+
+#contents{
+    padding-bottom:140px; /*フッターの高さと同じ*/
+}
+#footer{
+    height:140px;
+    position:absolute;
+    bottom:0;
+}
+
+/*footer*/
 
 header h1 {
     text-align: center;
@@ -29,6 +55,7 @@ header p {
 a {
     text-decoration: none;
 }
+
 
 /**
  * Progress bar for imagesLoaded
@@ -120,7 +147,6 @@ a {
     text-align: center;
     /* display: table-cell; */
     width: 200px;
-    height: 200px;
     font-size: 2em;
     font-weight: bold;
     text-decoration: none;
@@ -261,6 +287,41 @@ li .title{
     width:253px;
     text-align:center;
   }
+
+  .pic_box {
+        width:250px;/*画像のwidth*/
+        height:170px;/*画像のheight*/
+        position:relative;
+        overflow:hidden;
+        margin:10px;
+        float:left;
+    }
+    .pic_box span{
+    width:100%;
+    height:100%;
+    background:rgba(239,0,151,0.6);/*にゅっとでてくる部分の色*/
+    position:absolute;
+    top:185px;/*画像のheight*/
+    left:0;
+    }
+    .pic_box p {
+    font-weight:bold;
+    text-align:center;
+    margin-top:70px;
+         
+    }
+    .pic_box p a{
+    color:#fff;
+    text-decoration:none;
+    border:1px solid #fff;
+    padding:5px;
+
+    }
+    .pic_box p a:hover {
+    background:#fff;
+    color:rgba(239,0,151,1);
+    }
+
 }
 /*===============================================
 ●tablet.css 画面の横幅が768pxまで

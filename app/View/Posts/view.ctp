@@ -1,4 +1,5 @@
-<?php echo $this->Html->script(array('sly.js','hor.js'));?>
+<div id="wrap">
+<?php echo $this->Html->script(array('jQuery.js','sly.js','hor.js'));?>
 <?php echo $this->Html->css('view');?>
 <!-- view.js -->
 <script type="text/javascript">
@@ -38,7 +39,11 @@ jQuery(function($){
   }());
 });
 </script>
+<div class="view_main_title">
 <h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?></h1>
+
+<input type="text" class="uk-form flt_rgt" placeholder="検索"> 
+</div>
 <span class="SubTitle"><?php echo h($post['Post']['SubTitle']);?></span>
 <div class="edit">
 <?php if($post['Post']['user_id']==$user_id){
@@ -75,11 +80,26 @@ foreach ($images as  $value) {
         </li>
 </ul>
 </div>
-    <div class="controls center">
-    <button class=" prev uk-botton"><i class="icon-chevron-left"></i> prev</button>
-    <button class=" next uk-botton">next <i class="icon-chevron-right"></i></button>
+
+  <div class="googlemaps_view">
+    <script type="text/javascript"></script>
   </div>
 
+    <div class="controls center">
+    <p class="nameofsite">つくたび.com</p>
+    <button class=" prev uk-botton"><i class="icon-chevron-left"></i> prev</button>
+    <button class=" next uk-botton">next <i class="icon-chevron-right"></i></button>
+
+   <!--  <a class="view_sns" href="http://b.hatena.ne.jp/entry/hoge.html[共有したいURL]" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title="任意のタイトル">はてなブックマークに追加  </a> -->
+
+    <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo "FULL_BASE_URL"."";?>&text=<?php echo h($post['Post']['MainTitle']); ?>&via=[ツイート内に含まれるユーザー名]&related=[関連アカウント]" target="_blank"></a>
+
+    <a class="uk-icon-button uk-icon-facebook view_sns" href="http://www.facebook.com/share.php?u=[共有したいURL]" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"></a>
+
+    
+    
+  </div>
+  
 </div>
 
             <ul class="pages"></ul>
@@ -89,8 +109,6 @@ foreach ($images as  $value) {
 <?php foreach($post['Comment']as$comment):?>
 <li id="comment">
 <?php echo h($comment['body'])?> by <?php echo h($comment['user_id']); ?>
-
-
     <p>コメント</p>
     <?php
 echo $this->Form->create('Comment',array('action'=>'add'));
@@ -119,3 +137,6 @@ echo $this->Form->create('Comment',array('action'=>'add'));
        });
     });
 </script> -->
+
+
+

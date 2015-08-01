@@ -5,7 +5,6 @@
 
 </style>
 
-
 <h1 class="main_h1">つくたび</h1>
 <form action="serch/index" method="post" accept-charset="utf-8" class="SerchArticle uk-form">
  <input type="text" name="" class="SerchInput" value="" placeholder="検索して下さい">
@@ -17,7 +16,7 @@
 <div class="uk-conatiner">
 <header>
 
-    <nav class="uk-navbar" data-uk-sticky>
+    <nav class="uk-navbar" data-uk-sticky> 
 
         <ul class="uk-navbar-nav">
             <?php if (isset($username)) {
@@ -82,26 +81,32 @@
 </header>
 
 
+
     <div role="main">
         <ul id="container" class="tiles-wrap animated">
+
       <?php foreach ($posts as $post) :?>
 
-            <li data-filter-class='["london", "art"]' class="main_tiles">
+            <li data-filter-class='["london", "art"]' class="main_tiles pic_box">
+            
                 <img src="/cakephp/img/<?php
 $string = $post['Post']['MainImg'];
 $pattern = '/\/Applications\/XAMPP\/xamppfiles\/htdocs\/cakephp\/app\/webroot\/img\//';
 $replacement = '';
 echo preg_replace($pattern, $replacement, $string);
  ?>" height="283" >
-
-                <h2 class="title"><?php echo h($post['Post']['MainTitle']);?></h2>
-                <p>London Art</p>
-                <a href="posts/view/<?php echo h($post['Post']['id']);?>" target="_blank"><p>続きを読む</p></a>
+                <span>
+                <a href="posts/view/<?php echo h($post['Post']['id']);?>" target="_blank"><p><?php echo h($post['Post']['MainTitle']);?></p></a>
+                </span>
             </li>
             <?php endforeach; ?>
      </ul>
 
 </div><!--container-->
+
+
+                <h2 class="title"></h2>
+                <p>London Art</p> 
 
 
 
@@ -173,4 +178,29 @@ $( document ).ready(function( $ ) {
 })(jQuery);
 
     </script>
+
+    <script type="text/javascript">
+$(function(){
+        
+        $('.pic_box').hover(function(){
+                $('>span',this).animate({
+                                        top:"0px"
+                                        }, 500 );
+                },function(){
+                $('>span',this).animate({
+                                        top:"200px"
+                                        }, 500 );
+                 
+        });
+});
+</script>
+
+
+    <div class="pic_box">
+    <img src="/cakephp/img/4c3627de8a01c3f00e59467749633a2c.png" height="283">
+    <span>
+<p><a href=""></a></p>
+</span></div>
+
+
 
