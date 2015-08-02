@@ -1,0 +1,67 @@
+@charset "utf-8";
+// ===================================================================
+// レイアウト関係のスタイル
+// ===================================================================
+
+
+/*----------------------------------------------------
+	#page
+----------------------------------------------------*/
+#page {
+	width: $base_width;
+	margin: 0 auto;
+	padding: 10px;
+	background: $sub_color;
+	font-size: fz(12);
+}
+
+
+/*----------------------------------------------------
+	#contents
+----------------------------------------------------*/
+#contents {
+	@extend .clearfix;
+	width: $base_width - 20px;
+	padding: 10px;
+	margin-bottom: $base_margin_bottom;
+	background: #ccc;
+	
+	.pageTop {
+		clear: both;
+		margin: 0;
+		text-align: right;
+	}
+}
+
+
+/*----------------------------------------------------
+	ヘッダー
+----------------------------------------------------*/
+#header {
+	width: $base_width;
+	margin-bottom: $base_margin_bottom;
+	background: #fff;
+	
+	#nav {
+		@extend .clearfix;
+		li {
+			float: left;
+		}
+	}
+}
+
+
+/*----------------------------------------------------
+	フッター
+----------------------------------------------------*/
+#footer {
+	@extend .clearfix;
+	width: $base_width;
+	background: #ccc;
+	
+	.copyright {
+		text-align: center;
+	}
+}
+
+
