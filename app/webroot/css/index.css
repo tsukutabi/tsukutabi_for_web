@@ -16,27 +16,6 @@ html{
     height: 100%;
 }
 
-/*footerをしたに貼り付けるための工夫*/
-
-#wrap{
-    width: 100%;
-    position: relative;
-    height:auto !important; /*IE6対策*/
-    height: 100%; /*IE6対策*/
-    min-height: 100%;
-}
-
-#contents{
-    padding-bottom:140px; /*フッターの高さと同じ*/
-}
-#footer{
-    height:140px;
-    position:absolute;
-    bottom:0;
-}
-
-/*footer*/
-
 header h1 {
     text-align: center;
     font-size: 30px;

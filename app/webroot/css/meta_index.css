@@ -1,0 +1,161 @@
+@charset "UTF-8";
+/* Coolors Exported Palette - coolors.co/f7f9f9-009dea-ffca3a-0b2027-e2b6cf */
+/* Reset Style */
+html {
+  overflow-y: scroll; }
+
+body {
+  line-height: 1;
+  color: #000; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0; }
+
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th {
+  text-align: left; }
+
+q:before, q:after {
+  content: ''; }
+
+img,
+object,
+embed {
+  vertical-align: top; }
+
+hr, legend {
+  display: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%; }
+
+img, abbr, acronym, fieldset {
+  border: 0; }
+
+li {
+  list-style-type: none; }
+
+/* YUI 3.4.1 (build 4118) Copyright 2011 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License. http://yuilibrary.com/license/ */
+body {
+  font: 13px/1.231 arial,helvetica,clean,sans-serif;
+  *font-size: small;
+  *font: x-small; }
+
+select, input, button, textarea {
+  font: 99% arial,helvetica,clean,sans-serif; }
+
+table {
+  font-size: inherit;
+  font: 100%; }
+
+pre, code, kbd, samp, tt {
+  font-family: monospace;
+  *font-size: 108%;
+  line-height: 100%; }
+
+/* 汎用クラス */
+[class^="mark"] {
+  padding-left: 15px;
+  background: no-repeat left 0.5em; }
+
+.mark1 {
+  background-image: url(../img/share/mark_1.gif); }
+
+.mark2 {
+  background-image: url(../img/share/mark_2.gif); }
+
+.mark3 {
+  background-image: url(../img/share/mark_3.gif); }
+
+.mark4 {
+  background-image: url(../img/share/mark_4.gif); }
+
+.mark5 {
+  background-image: url(../img/share/mark_5.gif); }
+
+.opacity {
+  opacity: 0.55;
+  -moz-opacity: 0.55;
+  filter: alpha(opacity=55);
+  -ms-filter: "alpha(opacity=55)"; }
+
+.inline_block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+.table_cell {
+  display: table-cell;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle; }
+
+.fr,
+.imgR {
+  float: right;
+  margin-left: 10px; }
+
+.fl,
+.imgL {
+  float: left;
+  margin-right: 10px; }
+
+.imgC,
+.tC,
+.btn {
+  text-align: center; }
+
+.imgC {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.tR,
+.sign {
+  text-align: right; }
+
+.box_size {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.ts_none {
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
+  -ms-text-shadow: none !important;
+  -o-text-shadow: none !important;
+  text-shadow: none !important; }
+
+.bs_none {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important; }
+
+/* clearfix */
+.clearfix {
+  *zoom: 1; }
+  .clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden; }
+
+/*----------------------------------------------------
+	印刷用スタイル
+----------------------------------------------------*/
+@media print {
+  * html body {
+    zoom: .7; } }

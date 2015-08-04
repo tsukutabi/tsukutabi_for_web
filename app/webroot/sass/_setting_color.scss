@@ -12,10 +12,10 @@ $use_html5: false;
 $use_extend_object: true;
 
 	// 簡易ロールオーバーの値
-	$opacity_value: .55;
+$opacity_value: .55;
 
 	// 余白調整用のクラスを使用するか
-	$use_spacing_classes: false;
+$use_spacing_classes: false;
 
 
 // 画像のパス
@@ -33,6 +33,15 @@ $base_width: 940px;
 
 // 要素の基本下マージン
 $base_margin_bottom: 15px;
+
+/* Coolors Exported Palette - coolors.co/f7f9f9-009dea-ffca3a-0b2027-e2b6cf */
+
+$white: #f7f9f9; //rgba(247, 249, 249, 100)
+$mainblue: #009dea; //rgba(0, 157, 234, 100)
+$yellow: #ffca3a; //rgba(255, 202, 58, 100)
+$black: #0b2027; //rgba(11, 32, 39, 100)
+$pink: #e2b6cf; //rgba(226, 182, 207, 100)
+
 
 
 // メインカラー（ベースカラー）
@@ -61,6 +70,6 @@ $set_prefix: -webkit-, -moz-, -ms-, -o-, '';
 
 
 // 角丸の初期値
-$br_value: 3px;
+$br_value: 4px;
 
 
