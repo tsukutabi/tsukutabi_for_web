@@ -3,11 +3,10 @@
 <style>
 
 </style>
-<nav class="navbar navbar-default"><h2 class="postaddmainh2">旅行記を作成して下さい。</h2></nav>
+<nav class="navbar navbar-default"><h2 class="postaddmainh2">旅行記を作成して下さい。</h2>
+</nav>
 <div class="container">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!--<script src="../js/fileinput_locale_fr.js" type="text/javascript"></script>-->
-        <!--<script src="../js/fileinput_locale_es.js" type="text/javascript"></script>-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
     <?php echo  $this->Html->script("fileinput.js");?>
     <?php echo $this->Html->css(array("fileinput.min","postsadd"));?>
@@ -18,30 +17,39 @@
     <br>
     <div class="input_data">
         <p class="for_data datas">出発日を教えて下さい。<input type="date" name="DepartureData"></p>
-        <p class="arrival_data datas">到着日を教えて下さい。<input type="date" name="BackData"></p>
+        <p class="arrival_data datas">到着日を教えて下さい。<input type="date" name="BackedData"></p>
     </div>
 
-    
+    <input type="text" class="form-control " placeholder="旅行のタグ" >
     <div class="form-group">
-        <input  id="input-id" name="photos[]" class="file" type="file" multiple data-preview-file-type="any"  data-preview-file-icon="" >
+        <input  id="input-id" name="photos[]" class="file" type="file" multiple data-preview-file-type="any" data-preview-file-icon="" >
     </div>
-    <input type="submit"  class="btn btn-link btn-lg send_btn" onSubmit="return checkSubmit()">
+
     <br>
 </form>
+
+
     <script>
         $("#input-id").fileinput({
-            uploadUrl: 'localhost/cakephp/posts/add',
-            allowedFileExtensions : ['jpg', 'png','gif','jpeg'],
+            uploadUrl: "<?php echo FULL_BASE_URL; ?>/cakephp/posts/add",
+            allowedFileExtensions : ['jpg','png','gif','jpeg'],
             multiple:true,
             uploadAsync:false,
             previewFileType:'any',
-            showUpload:false,
+            maxFileCount: 80,
                 uploadExtraData: {
                     maintitle:Main,
                     SubTitle:Sub,
                     User_Id:'<?php echo "$userid";?>'
                 }
+
         });
+
+        $("input-id").on(clicked,function(){
+            location.href="<?php echo FULL_BASE_URL; ?>cakephp/users/view/<?php echo $userid ;?>"
+        })
+
+
 
     </script>
 <footer class="PostsAddFooter">

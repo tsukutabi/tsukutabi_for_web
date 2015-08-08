@@ -2111,7 +2111,7 @@
             if (!self.isUploadable || self.isDisabled) {
                 content = '<button type="submit" title="' + self.uploadTitle + '"class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
             } else {
-                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</a>';
+                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" id="' + css  + status +  '" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</a>';
             }
             return content;
         }
@@ -2225,11 +2225,11 @@
         fileSingle: 'file',
         filePlural: 'files',
         browseLabel: 'Browse &hellip;',
-        removeLabel: 'Remove',
+        removeLabel: '写真を全て削除する',
         removeTitle: 'Clear selected files',
         cancelLabel: 'Cancel',
         cancelTitle: 'Abort ongoing upload',
-        uploadLabel: 'Upload',
+        uploadLabel: 'アップロード',
         uploadTitle: 'Upload selected files',
         msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>. Please retry your upload!',
         msgFilesTooLess: 'You must select at least <b>{n}</b> {files} to upload. Please retry your upload!',

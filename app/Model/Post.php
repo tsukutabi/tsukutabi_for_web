@@ -7,6 +7,12 @@ class Post extends AppModel
 {
 	public $belongsTo = 'User';
 	public $hasMany = "Comment";
+	public $actsAs = array('Search.Searchable');
+	public $filterArgs = array(
+		// 例
+		'author_id' => array('type' => 'value'),
+		'title' => array('type' => 'like'),
+	);
 	public $validate = array(
 			'MainTitle'=>array(
 				'rule'=>array('between',3,300)

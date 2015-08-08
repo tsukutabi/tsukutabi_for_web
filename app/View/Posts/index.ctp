@@ -109,10 +109,6 @@ echo preg_replace($pattern, $replacement, $string);
                 <p>London Art</p> 
 
 
-
-
-
-
      <?php echo $this->Html->script(array('jquery.sliderPro.min.js','uikit.js','index.js','wookmark.min.js','imagesloaded.pkgd.min.js',''));
     echo $this->fetch('script');?>
 

@@ -3,7 +3,9 @@ App::uses('Folder','Utility','Session');
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
-	public $components= array('Session','Auth','RequestHandler');
+	public $components= array('Session','Auth','RequestHandler','Search.Prg');
+	public $presetVars = true;
+	public $user = 'Tag';
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
@@ -26,6 +28,10 @@ class PostsController extends AppController{
 		$this->set('posts',$this->Post->find('all'));
 		// 新着のデータ
 		$this->set('NewPost',$this->Post->find(),30);
+
+		if ($this->request->is('post')){
+
+		}
 	}
 	// ページの詳細を表示する。
 	public function view($id= null)
@@ -45,6 +51,12 @@ class PostsController extends AppController{
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
 	$this->set('userid',$this->Session->read('Auth.User.id'));
+//	$this->set('tag_names',$this->Tag->find('list',array(
+//		'fields'=>array('Tag.name'))
+//	));
+
+
+
 	if ($this->request->is('post')){
 		$this->log($_POST,LOG_DEBUG);
 		$this->log($_FILES,LOG_DEBUG);
@@ -82,11 +94,9 @@ class PostsController extends AppController{
 			);
 		 if($this->Post->save($database)){
             $this->Session->setFlash('保存が完了しました。');
-             $this->redirect(array(
-                 'controller'=>'posts',
-                 'view'=>'index',
-//                 'id'=>
-             ));
+             $this->redirect(
+				 array('controller'=>'posts','action'=>'index')
+			 );
          }
     }// is(post)の閉じタグ
 		 // throw new MethodNotAllowedException('POSTでアクセスして下さい。');
