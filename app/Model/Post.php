@@ -24,10 +24,11 @@ class Post extends AppModel
 				'notEmpty'=>true,
 		);
 
-    public function MatchUserIdtoPostsUser($postsUserid){
-        $userid = $this->Sesion->read('Auth.User.username');
+//	投稿の人とsession.authでのマッチング
 
-        if( $userid === $postsUserid){
+    public function MatchUserIdToUser($postsUserid){
+        $SesssionUserid = $this->Sesion->read('Auth.User.username');
+        if( $SesssionUserid === $postsUserid){
             $result= true;
         }else{
             $result =false;
@@ -35,6 +36,21 @@ class Post extends AppModel
             return $result;
 
     }
+
+
+	public function get_userid($id){
+		$take_user_id = 'select user_id from posts where id = :id';
+
+		$params = array(
+			'id' => $id
+		);
+
+
+		$data = $this->query($take_user_id,$params);
+		return $data;
+
+
+	}
 
     
 

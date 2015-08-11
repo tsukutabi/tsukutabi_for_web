@@ -51,11 +51,13 @@ class PostsController extends AppController{
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
 	$this->set('userid',$this->Session->read('Auth.User.id'));
-//	$this->set('tag_names',$this->Tag->find('list',array(
-//		'fields'=>array('Tag.name'))
-//	));
+
+	$get_tug_name_ql = 'SELECT name FROM tags;';
+	$this->set('tag_name',$this->Post->query($get_tug_name_ql));
 
 
+	$get_tug_num_ql = 'SELECT COUNT(ID) FROM tags;';
+	$this->set('tag_num',$this->Post->query($get_tug_num_ql));
 
 	if ($this->request->is('post')){
 		$this->log($_POST,LOG_DEBUG);
@@ -125,7 +127,16 @@ class PostsController extends AppController{
 	// 投稿の編集用
 	public function edit($id = null){
 		$this->Post->id =$id;
-		if ($this->request->is('get')){
+//		userのマッチング
+		$take_user_id = 'select user_id from posts where id = :id';
+		$params = array(
+			'id' => $id
+		);
+		$PostUserId = $this->Post->query($take_user_id,$params);
+		$SessionUserid = $this->Session->read('Auth.User.id');
+		$PostUserId == $SessionUserid;
+
+		if ($this->request->is('get')  ){
 			$this->request->data = $this->Post->read();
 		}else{
 			if($this->Post->save($this->request->data)) {
@@ -149,7 +160,7 @@ class PostsController extends AppController{
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-			if(MatchUserIdtoPostsUser){
+			if(MatchUserIdToUser){
                 $this->Post->delete($id);
 			    $this->Session->setFlash(__(' id: %s は削除されました。', h($id)));
 		        return $this->redirect(array('action' => 'index'));
@@ -166,18 +177,4 @@ class PostsController extends AppController{
 		}
 	}
 
-
-
-	// 使う関数まとめ private
-	//
-	// ユーザーIDとpost idのマッチングをする。
-	private function MatchUserIdtoPost($value='')
-	{
-
-	}
-	// 画像の拡張子をリネームする
-	private function RenameImageName($value='')
-	{
-
-	}
 }

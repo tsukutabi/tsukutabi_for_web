@@ -8,6 +8,6 @@
 
 class Tag extends AppModel
 {
-    public $belong_to = 'Post';
+    public $belongTo = 'Post';
 
 }
