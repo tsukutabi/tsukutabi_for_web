@@ -44,14 +44,29 @@ class Post extends AppModel
 		$params = array(
 			'id' => $id
 		);
-
-
 		$data = $this->query($take_user_id,$params);
 		return $data;
+	}
 
+	public function GetTagName (){
+		$get_tag_name_ql = 'SELECT name FROM tags;';
+		$tagname = $this->query($get_tag_name_ql);
+
+		return $tagname;
+	}
+
+
+	public function GetTagNum (){
+		$get_tag_num_ql = 'SELECT COUNT(ID) FROM tags;';
+		$tagnum= $this->query($get_tag_num_ql);
+
+		return $tagnum;
 
 	}
 
-    
+
+
+
+
 
 }

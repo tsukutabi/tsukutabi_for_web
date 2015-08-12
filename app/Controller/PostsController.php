@@ -3,17 +3,14 @@ App::uses('Folder','Utility','Session');
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
-	public $components= array('Session','Auth','RequestHandler','Search.Prg');
+	public $components= array('Session','Auth','RequestHandler','Search.Prg','Security');
 	public $presetVars = true;
-	public $user = 'Tag';
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
 		$this->Auth->allow('users/login',
 		'users/add','index','view','jsonapi');
 	}
-
-        // 以下 public
 	// ホームの表示
 	public function index()
 	{
@@ -44,22 +41,16 @@ class PostsController extends AppController{
         $this->set('user_id',$this->Session->read('Auth.User.id'));
 		$this->Post->id=$id;
 		$this->set('post',$this->Post->read());
-
 	}
 	// 旅行記の作成
 	public function add (){
 	$this->layout='add';
 	$this->set('title_for_layout','つくたび作成ページ');
 	$this->set('userid',$this->Session->read('Auth.User.id'));
-
-	$get_tug_name_ql = 'SELECT name FROM tags;';
-	$this->set('tag_name',$this->Post->query($get_tug_name_ql));
-
-
-	$get_tug_num_ql = 'SELECT COUNT(ID) FROM tags;';
-	$this->set('tag_num',$this->Post->query($get_tug_num_ql));
-
-	if ($this->request->is('post')){
+	$this->set('token',$this->Session->read('_Token.key'));
+	$token = $this->Session->read('_Token,key');
+	$this->set('tag_name',$this->Post->GetTagName());
+	if ($this->request->is('post') && $_POST['access.key'] == $token){
 		$this->log($_POST,LOG_DEBUG);
 		$this->log($_FILES,LOG_DEBUG);
 		$this->Post->create();
@@ -75,8 +66,6 @@ class PostsController extends AppController{
             list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['photos']['tmp_name'][$i]);
             $img_extension[$i]=$this->Post->checkmime($mime_type[$i]);
             $image["imgname$i"]= md5(microtime()).".$img_extension[$i]";
-
-//            $uploadfile = IMAGES . $image["imgname$i"];
             move_uploaded_file($_FILES['photos']['tmp_name'][$i],IMAGES.$image["imgname$i"]);
         }
 //        アップロードされた画像の名前を結合する
@@ -171,10 +160,11 @@ class PostsController extends AppController{
 	public function fav($id){
 		//getとかはエラー
 		if ($this->request->is('ajax') && $this->request->is('post')){
+
+
 				$this->Post->save($FavDatabase);
 		}elseif($this->request->is('get')){
 			throw new MethodNotAllowedException('getで投げられてますよ~~');
 		}
 	}
-
 }

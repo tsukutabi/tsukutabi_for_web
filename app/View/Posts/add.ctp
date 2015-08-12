@@ -5,7 +5,7 @@
         position: absolute;
         background-color: #FFFFFF;
         border: 1px solid #CCCCFF;
-        font-size: 90%;
+        font-size: 14px;
         width: 200px;
     }
     #suggest div {
@@ -22,7 +22,13 @@
         background-color: #99CCFF;
     }
     .mg-t{
-        margin-bottom: 40px ;
+        margin-bottom: 120px ;
+    }
+    #flashMessage{
+        width: 840px;
+        height: 50px;
+        margin: 10 auto;
+        text-align: center;
     }
 </style>
 <nav class="navbar navbar-default"><h2 class="postaddmainh2">旅行記を作成して下さい。</h2>
@@ -43,11 +49,13 @@
         <p class="arrival_data datas">到着日を教えて下さい。<input type="date" name="BackedData"></p>
     </div>
 
-
+    <div class="mg-t">
     <!-- 入力フォーム -->
-    <input id="text" type="text" name="tags" value="" autocomplete="off" placeholder="旅行のタグを付けて下さい" size="10" style="display: block" class="form-control mg-t">
+    <input id="text" type="text" name="tags" value="" autocomplete="off" placeholder="旅行のタグを付けて下さい" size="10" style="display: block" class="form-control">
     <!-- 補完候補を表示するエリア -->
-    <div id="suggest" style="display:none;"></div>
+    <div id="suggest" class="form-control" style="display:none;"></div>
+    </div>
+    <input type="hidden" value="<?php echo $token?>" name="access.key">
 
     <div class="form-group">
         <input  id="input-id" name="photos[]" class="file" type="file" multiple data-preview-file-type="any" data-preview-file-icon="" >
@@ -59,10 +67,9 @@
 
     <script>
 
-        <!-- form type=text系を監視しておいて、 uploadextraに付け加えて、アップロードできるようにしておく。-->
+        <!-- form type=text系を監視しておいて uploadextraに付け加えてアップロードできるようにしておく-->
         var Main ="a";
         var Sub = "b";
-
         $("#input-id").fileinput({
             uploadUrl: "<?php echo FULL_BASE_URL; ?>/cakephp/posts/add",
             allowedFileExtensions : ['jpg','png','gif','jpeg'],
@@ -73,31 +80,25 @@
                 uploadExtraData: {
                     maintitle:Main,
                     SubTitle:Sub,
-                    User_Id:'<?php echo "$userid";?>'
-
+                    User_Id:'<?php echo "$userid";?>',
+                    accesskey :'<?php echo $token?>'
                 }
 
         });
-
         $("input-id").on(clicked,function(){
             location.href="<?php echo FULL_BASE_URL; ?>cakephp/users/view/<?php echo $userid ;?>"
         })
-
-
-
     </script>
 
     <script>
-
         var list=[ <?php foreach ($tag_name as $value){
             echo '"';
             print_r ($value['tags']['name']);
-            echo '"';
-            echo ",";}?>"umi"];
+            echo '",';}?>"umi"];
 
         console.log(list);
 
-        new Suggest.Local("text", "suggest", list);
+        new Suggest.LocalMulti("text", "suggest", list);
 
         function startSuggest() {
             new Suggest.Local(
@@ -110,6 +111,14 @@
         window.addEventListener ?
                 window.addEventListener('load', startSuggest, false) :
                 window.attachEvent('onload', startSuggest);
+    </script>
+
+    <script>
+        $(function){
+            setTimeout(function(){
+                $('#flashMessage').fadeOut("slow");
+            }, 800);
+        }
     </script>
 
     <footer class="PostsAddFooter">

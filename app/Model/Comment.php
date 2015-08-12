@@ -1,6 +1,6 @@
 <?php
 /**
- * posts用のmodelですよっと
+ * Comment用のmodelですよっと
  *
  */
 class Comment extends AppModel
