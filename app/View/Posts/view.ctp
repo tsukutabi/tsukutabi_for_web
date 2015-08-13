@@ -62,7 +62,7 @@ jQuery(function($){
         <li id="time_titles">
             <?php foreach ($post['Comment'] as $comment): ?>
                 <p class="UserComment">
-        <?php echo h($comment['body']);?> by <?php echo h($comment['commenter']); ?>
+        <?php echo h($comment['body']);?> by <?php echo h($comment['user_id']); ?>
                 </p>
             <?php endforeach;?>
             <input type="text" class="Comment">

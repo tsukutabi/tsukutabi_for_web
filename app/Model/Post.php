@@ -6,7 +6,7 @@
 class Post extends AppModel
 {
 	public $belongsTo = 'User';
-	public $hasMany = "Comment";
+	public $hasMany = array( 'Comment','Fav');
 	public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
 		// 例

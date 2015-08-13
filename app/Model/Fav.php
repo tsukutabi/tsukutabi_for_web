@@ -1,0 +1,12 @@
+<?php
+/**
+ * お気に入り登録用のmodelですよっと
+ *
+ */
+class Fav extends AppModel
+{
+    public $belongsTo =array('Post','User');
+
+//    各項目 not null ＋ sanitize
+
+}
