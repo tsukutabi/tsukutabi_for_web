@@ -1,4 +1,12 @@
+<style>
+    .frame ul li{
+        color: lightsteelblue;
+        background-color: rgba(255,240,1,0.5);
+    }
+</style>
+
 <div id="wrap">
+
 <?php echo $this->Html->script(array('jQuery.js','sly.js','hor.js'));?>
 <?php echo $this->Html->css('view');?>
 <!-- view.js -->
@@ -61,12 +69,45 @@ jQuery(function($){
     <ul class="clearfix">
         <li id="time_titles">
             <?php foreach ($post['Comment'] as $comment): ?>
-                <p class="UserComment">
+                <p class="UserComment" id="comment_<?php h($comment['id']);?>">
         <?php echo h($comment['body']);?> by <?php echo h($comment['user_id']); ?>
+        <?php echo $this->Html->link('削除','#',array('class'=>'delete','data-comment-id'=>$comment['id'])); ?>
                 </p>
+
             <?php endforeach;?>
-            <input type="text" class="Comment">
-            <input type="submit" class="CommentSubmit">
+
+            <!-- 削除用 js by たにはた-->
+
+            <script>
+                $(function(){
+                    $('a.delete').click(function(e){
+                        if(confirm('本当に削除してもいいですか??')){
+                            $.post('/cakephp/comments/delete/'+$(this).data('comment-id'),{},function(res){
+                                $('#comment_'+res.id).fadeOut();
+                            },"json");
+                        }
+                        return false;
+                    })
+                })
+            </script>
+
+
+            <!-- /削除用js-->
+
+            <?php
+            echo $this->Form->create('Comment',array('action'=>'add'));
+            echo '<div class="uk-form-row">';
+            echo $this->Form->input('body', array(
+            'label'=>false,
+            'div'=>false,
+            'class'=>'uk-width-1-1 uk-form-large',
+            'placeholder' => __d('users', 'ユーザー名')));
+
+            echo '</div>';
+            echo $this->Form->input('Comment.user_id',array('type'=>'hidden','value'=>$_SESSION['Auth']['User']['id']));
+            echo $this->Form->input('Comment.post_id',array('type'=>'hidden','value'=>$post['Post']['id']));
+            echo $this->Form->end('保存');
+            ?>
         </li>
         <?php
 $images = explode(',',$post['Post']['Images']);
@@ -76,7 +117,16 @@ foreach ($images as  $value) {
 }
 ?>
         <li>
-       <p>written by <?php echo $post['User']['username']; ?></p>
+
+            <div id="contents_sample_wrap">
+
+                    <div class="text_box"></div>
+
+                <input type="button" value="お気に入り" /><!--クリックしたときにtext()を実行-->
+            </div>
+
+
+            <p>written by <?php echo $post['User']['username']; ?></p>
         </li>
 </ul>
 </div>
@@ -127,16 +177,31 @@ echo $this->Form->create('Comment',array('action'=>'add'));
 </li>
 <?php endforeach; ?>
 </ul>
-<!-- <script type="text/javascript">
 
-  $('img').error(function(){
-      $(this).attr({
-            src: '/testnews/images/logo.png',
-              alt: 'エラー',
-              style:'border: 0px solid #fff;width:400px;height:400px;'
-       });
-    });
-</script> -->
+    <script>
+        var click_count = 3;
+        //▼▼ページ要素が操作可能になったときの処理
+        $(function(){
+            //▼▼ボタンがクリックされたときの処理
+            //▼▼inputタグのtype属性buttonにアクセスするセレクタ
+            $(":button").click(function(){
+                //▼▼"#contents_sample_wrap .text_box"タグに書き込む
+                click_count++;
+                $("#contents_sample_wrap .text_box").text( click_count);
+            });
+        });
+    </script>
+
+    <!-- <script type="text/javascript">
+
+      $('img').error(function(){
+          $(this).attr({
+                src: '/testnews/images/logo.png',
+                  alt: 'エラー',
+                  style:'border: 0px solid #fff;width:400px;height:400px;'
+           });
+        });
+    </script> -->
 
 
 

@@ -113,6 +113,8 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+App::uses( 'CakeEmail', 'Network/Email');
+
 CakePlugin::loadAll();
 
 

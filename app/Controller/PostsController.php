@@ -85,9 +85,9 @@ class PostsController extends AppController{
 			);
 		 if($this->Post->save($database)){
             $this->Session->setFlash('保存が完了しました。');
-             $this->redirect(
-				 array('controller'=>'posts','action'=>'index')
-			 );
+            $this->redirect(
+				array('controller'=>'posts','action'=>'index')
+			);
          }
     }// is(post)の閉じタグ
 		 // throw new MethodNotAllowedException('POSTでアクセスして下さい。');

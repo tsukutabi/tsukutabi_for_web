@@ -24,19 +24,6 @@ class Post extends AppModel
 				'notEmpty'=>true,
 		);
 
-//	投稿の人とsession.authでのマッチング
-
-    public function MatchUserIdToUser($postsUserid){
-        $SesssionUserid = $this->Sesion->read('Auth.User.username');
-        if( $SesssionUserid === $postsUserid){
-            $result= true;
-        }else{
-            $result =false;
-        }
-            return $result;
-
-    }
-
 
 	public function get_userid($id){
 		$take_user_id = 'select user_id from posts where id = :id';
