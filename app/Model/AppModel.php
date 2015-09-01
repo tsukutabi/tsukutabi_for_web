@@ -21,6 +21,8 @@
 
 App::uses('Model', 'Model');
 
+App::uses('CakeEmail', 'Network/Email');
+
 /**
  * Application model for Cake.
  *
@@ -43,4 +45,33 @@ class AppModel extends Model {
         }
         return $img_extension;
     }
+
+
+    //                push通知 like twiiter facebook
+
+    public function sendemail_to_added_user($user_id){
+
+//                email送信のコードを書く by こうすけ http://kwski.net/cakephp-2-x/1017/
+//                commentされた postsのuserに送信されるようにする。
+
+
+        $sql_fetch_useremailadress = 'select email from users where id =:id';
+
+        	$params = array(
+                'id' => $user_id
+            );
+		$users_email = $this->query($sql_fetch_useremailadress,$params);
+
+        $Commentedemail = new CakeEmail( 'gmail');                        // インスタンス化
+                $Commentedemail->from( array( 'sender@domain.com' => 'Sender'));  // 送信元
+                $Commentedemail->to( $users_email);                      // 送信先
+                $Commentedemail->subject( 'メールタイトル');                      // メールタイトル
+
+                $Commentedemail->emailFormat( 'text');                            // フォーマット
+                $Commentedemail->template( 'templete');                           // テンプレートファイル
+                $Commentedemail->viewVars( compact( 'var1', 'var2'));             // テンプレートに渡す変数
+
+                $Commentedemail->send();
+    }
+
 }

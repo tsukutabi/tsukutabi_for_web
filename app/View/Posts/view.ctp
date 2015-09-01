@@ -48,8 +48,7 @@ jQuery(function($){
 });
 </script>
 <div class="view_main_title">
-<h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?></h1>
-
+<h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?>  </h1>
 <input type="text" class="uk-form flt_rgt" placeholder="検索"> 
 </div>
 <span class="SubTitle"><?php echo h($post['Post']['SubTitle']);?></span>
@@ -67,6 +66,10 @@ jQuery(function($){
 </div>
 <div class="frame effects" id="effects" >
     <ul class="clearfix">
+        <li>
+            <?php echo $_SESSION['_Token']['csrfTokens'][0];?>
+            <?php var_dump($_SESSION['_Token']['csrfTokens']);?>
+        </li>
         <li id="time_titles">
             <?php foreach ($post['Comment'] as $comment): ?>
                 <p class="UserComment" id="comment_<?php h($comment['id']);?>">
@@ -110,24 +113,39 @@ jQuery(function($){
             ?>
         </li>
         <?php
-$images = explode(',',$post['Post']['Images']);
-foreach ($images as  $value) {
-	echo '<li><img class="slider" src="/cakephp/img/'.$value;
-	echo ' " ></li>';
-}
-?>
+        $images = explode(',',$post['Post']['Images']);
+        foreach ($images as  $value) {
+	    echo '<li><img class="slider" src="/cakephp/img/'.$value;
+	    echo ' " ></li>';
+        }?>
         <li>
 
+            <?php  ?>
+
             <div id="contents_sample_wrap">
-
-                    <div class="text_box"></div>
-
-                <input type="button" value="お気に入り" /><!--クリックしたときにtext()を実行-->
+                <div class="text_box">3</div>
+                <input type="button" value="お気に入り" id="fav"/><!--クリックしたときにtext()を実行-->
             </div>
-
-
             <p>written by <?php echo $post['User']['username']; ?></p>
+
+
         </li>
+        <li>
+            <?php
+            echo $this->Form->create();
+            echo $this->Form->input('name');
+            echo $this->Js->submit('Send', array(
+            'before'=>$this->Js->get('#sending')->effect('fadeIn'),
+            'success'=>$this->Js->get('#sending')->effect('fadeOut'),
+            'update'=>'#success'
+            ));
+            echo $this->Form->end();
+            ?>
+            <div id="success"></div>
+            <div id="sending"></div>
+        </li>
+
+
 </ul>
 </div>
 
@@ -178,16 +196,36 @@ echo $this->Form->create('Comment',array('action'=>'add'));
 <?php endforeach; ?>
 </ul>
 
+
+    < ?php echo $html->formTag() ?>
+    <input type=”hidden” name=”data[_Token][key]” value=”6ab2d0043ab0a0d7974324ccefe17806cb1279d5″ id=”Token1858912179 targetform″>
+
     <script>
         var click_count = 3;
         //▼▼ページ要素が操作可能になったときの処理
         $(function(){
             //▼▼ボタンがクリックされたときの処理
             //▼▼inputタグのtype属性buttonにアクセスするセレクタ
-            $(":button").click(function(){
+            $("#fav").click(function(e){
                 //▼▼"#contents_sample_wrap .text_box"タグに書き込む
                 click_count++;
                 $("#contents_sample_wrap .text_box").text( click_count);
+                $.ajax({
+                    type:'POST',
+                    url: 'http://112.168.33.10/cakephp/favs/add/',
+                    dataType: 'json',
+                    data : { user_id :<?php if (isset($user_id)){echo "$user_id";}?>,
+                        'data[_Token][key]':
+                        post_id :<?php echo($post['Post']['id']);?> },
+                    timeout:10000,
+                    success: function(data) {
+                        alert("ok");
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("error");
+                    }
+                });
+
             });
         });
     </script>

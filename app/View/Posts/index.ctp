@@ -6,7 +6,8 @@
 </style>
 
 <h1 class="main_h1">つくたび</h1>
-<form action="serch/index" method="post" accept-charset="utf-8" class="SerchArticle uk-form">
+
+<form action="search/index" method="post" accept-charset="utf-8" class="SerchArticle uk-form">
  <input type="text" name="" class="SerchInput" value="" placeholder="検索して下さい">
 </form>
   <p class="main_p">do travel, share it</p>
@@ -15,7 +16,6 @@
 
 <div class="uk-conatiner">
 <header>
-
     <nav class="uk-navbar" data-uk-sticky> 
 
         <ul class="uk-navbar-nav">
@@ -198,5 +198,21 @@ $(function(){
 <p><a href=""></a></p>
 </span></div>
 
+
+    <?php
+            echo $this->Form->create();
+    echo $this->Form->input('name');
+    echo $this->Js->submit('Send', array(
+    'before'=>$this->Js->get('#sending')->effect('fadeIn'),
+    'success'=>$this->Js->get('#sending')->effect('fadeOut'),
+    'update'=>'#success'
+    ));
+    echo $this->Form->end();
+    ?>
+    <div id="success"></div>
+    <div id="sending"></div>
+
+
+    <?php echo $this->Js->writeBuffer(); ?>
 
 

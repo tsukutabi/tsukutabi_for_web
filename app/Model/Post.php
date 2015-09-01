@@ -9,9 +9,8 @@ class Post extends AppModel
 	public $hasMany = array( 'Comment','Fav');
 	public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
-		// 例
-		'author_id' => array('type' => 'value'),
-		'title' => array('type' => 'like'),
+		array('name' => 'title',
+			'type' => 'like'),
 	);
 	public $validate = array(
 			'MainTitle'=>array(
@@ -43,17 +42,28 @@ class Post extends AppModel
 	}
 
 
-	public function GetTagNum (){
-		$get_tag_num_ql = 'SELECT COUNT(ID) FROM tags;';
-		$tagnum= $this->query($get_tag_num_ql);
+//	public function match_fav_id ($id = null){
 
-		return $tagnum;
+//		$fetch_ = 'select user_id,  from favs;';
 
+//		$params = array(
+//			 $id=> $post_id
+//		)
+
+//		$data = $this->query($take_user_id,$params);
+//		return $fav_boolean;
+//	}
+
+	public function fetch_index_four_rows (){
+//		indexに返す用のデータを取る!!
+//		必要共通項目 記事ID main_title created subtitle お気に入り数
+		$new_query = 'SELECT posts.id,posts.MainTitle,posts.SubTitle,posts.MainImg,posts.created,users.username
+							  from posts INNER JOIN users ON (posts.user_id = users.id) ORDER BY created LIMIT 40';
+		$new_articles = $this->query($new_query);
+//		最新の旅行記を50件
+
+//		favs数が大きい旅行記が多い50件
+		return $new_articles;
 	}
-
-
-
-
-
 
 }

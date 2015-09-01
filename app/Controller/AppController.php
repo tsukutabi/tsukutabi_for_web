@@ -31,19 +31,4 @@ App::uses('Controller', 'Controller','CakeEmail','Network/Email');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('DebugKit.Toolbar');
-
-
-//	投稿した人のidとsession.authでのマッチング
-
-	public function MatchUserIdToUser($postsUserid){
-		$SesssionUserid = $this->Sesion->read('Auth.User.username');
-		if( $SesssionUserid === $postsUserid){
-			$result= true;
-		}else{
-			$result =false;
-		}
-		return $result;
-	}
-
 }

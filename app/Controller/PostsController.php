@@ -3,13 +3,20 @@ App::uses('Folder','Utility','Session');
 class PostsController extends AppController{
 	public $layout = 'index';
 	public $helpers = array( 'Html','Form','Session','Rss');
-	public $components= array('Session','Auth','RequestHandler','Search.Prg','Security');
-	public $presetVars = true;
+	public $components= array('Session','Auth','RequestHandler','Search.Prg','Security','DebugKit.Toolbar');
+	public $presetVars = array(
+		array('field' => 'title', 'type' => 'value'),
+	);
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
 		$this->Auth->allow('users/login',
-		'users/add','index','view','jsonapi');
+		'users/add','index','view','indexjson','viewjson');
+	}
+	function find() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Post->parseCriteria($this->passedArgs);
+		$this->set('find_articles', $this->paginate());
 	}
 	// ホームの表示
 	public function index()
@@ -25,10 +32,11 @@ class PostsController extends AppController{
 		$this->set('posts',$this->Post->find('all'));
 		// 新着のデータ
 		$this->set('NewPost',$this->Post->find(),30);
-
-		if ($this->request->is('post')){
-
-		}
+	}
+	public function indexjson(){
+		$this->viewClass ='Json';
+		$this->set('entries',$this->Post->find('all'));
+		$this->set('_serialize',array('entries'));
 	}
 	// ページの詳細を表示する。
 	public function view($id= null)
@@ -37,20 +45,27 @@ class PostsController extends AppController{
         $a=$this->Post->query($sqlfortitle);
         $b=$a[0]['posts']['MainTitle'];
         $this->set('title_for_layout',$b);
-
         $this->set('user_id',$this->Session->read('Auth.User.id'));
 		$this->Post->id=$id;
 		$this->set('post',$this->Post->read());
 	}
+
+	public function viewjson($id = null){
+		$this->viewClass = 'Json';
+		$this->Post->id=$id;
+		$this->set('post',$this->Post->read());
+		$this->set('_serialize',array('post'));
+	}
 	// 旅行記の作成
 	public function add (){
-	$this->layout='add';
-	$this->set('title_for_layout','つくたび作成ページ');
-	$this->set('userid',$this->Session->read('Auth.User.id'));
-	$this->set('token',$this->Session->read('_Token.key'));
-	$token = $this->Session->read('_Token,key');
-	$this->set('tag_name',$this->Post->GetTagName());
+		$this->layout='add';
+		$this->set('title_for_layout','つくたび作成ページ');
+		$this->set('userid',$this->Session->read('Auth.User.id'));
+		$this->set('token',$this->Session->read('_Token.key'));
+		$token = $this->Session->read('_Token,key');
+		$this->set('tag_name',$this->Post->GetTagName());
 	if ($this->request->is('post') && $_POST['access.key'] == $token){
+		$this->log($_REQUEST,LOG_DEBUG);
 		$this->log($_POST,LOG_DEBUG);
 		$this->log($_FILES,LOG_DEBUG);
 		$this->Post->create();
@@ -94,25 +109,14 @@ class PostsController extends AppController{
 	} //add functionのとじタグ
 
 	public function contents($bgimgname ) {
-    $this->layout = false;
-    $post = $this->Post->findBybgimgname($bgimgname);
-    if (empty($post)) {
-      $this->cakeError('error404');
-    }
-    header('Content-type: ' . $post['Post']['filetype'] );
-    echo $post['Post']['bgimg'];
-  }
-	// userが自分の投稿を所得する。
-	public function user_post($user_id){
-		if (!id) {
-			throw new NotFoundException(__('無効なポストです。'));
-		}
-		$post = $this->Post->findById($id);
-		if(!$post){
-		throw new NotFoundException(__('無効なポストです。'));
-		}
-	}
-
+    	$this->layout = false;
+    	$post = $this->Post->findBybgimgname($bgimgname);
+    	if (empty($post)) {
+      		$this->cakeError('error404');
+    	}
+		header('Content-type: ' . $post['Post']['filetype'] );
+    	echo $post['Post']['bgimg'];
+  	}
 	// 投稿の編集用
 	public function edit($id = null){
 		$this->Post->id =$id;
@@ -124,7 +128,6 @@ class PostsController extends AppController{
 		$PostUserId = $this->Post->query($take_user_id,$params);
 		$SessionUserid = $this->Session->read('Auth.User.id');
 		$PostUserId == $SessionUserid;
-
 		if ($this->request->is('get')  ){
 			$this->request->data = $this->Post->read();
 		}else{
@@ -136,35 +139,20 @@ class PostsController extends AppController{
 			}
 		}
 	}
-	// ここにアクセスしたら jsonが帰るって来るよ!!
-	// webview用なので お察し下さい。
-	public function jsonapi(){
-		$this->viewClass ='Json';
-		$this->set('entries',$this->Post->find('all'));
-		$this->set('_serialize',array('entries'));
-	}
+
 	// 投稿を削除する
 	// 後、userとのマッチングをする。
 	public function delete($id){
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-			if(MatchUserIdToUser){
-                $this->Post->delete($id);
-			    $this->Session->setFlash(__(' id: %s は削除されました。', h($id)));
-		        return $this->redirect(array('action' => 'index'));
-		    }
-		}
-
-	// お気に入り登録機能
-	public function fav($id){
-		//getとかはエラー
-		if ($this->request->is('ajax') && $this->request->is('post')){
-
-
-				$this->Post->save($FavDatabase);
-		}elseif($this->request->is('get')){
-			throw new MethodNotAllowedException('getで投げられてますよ~~');
+		if(MatchUserIdToUser){
+			$this->Post->delete($id);
+			$this->Session->setFlash(__(' id: %s は削除されました。', h($id)));
+			return $this->redirect(array('action' => 'index'));
 		}
 	}
+
+
+
 }
