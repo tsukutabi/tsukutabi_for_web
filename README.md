@@ -1,50 +1,42 @@
-# CakePHP
+# tsukutabi for web
 
-[![Latest Stable Version](https://poser.pugx.org/cakephp/cakephp/v/stable.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![License](https://poser.pugx.org/cakephp/cakephp/license.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
-[![Code consistency](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/grade.svg)](http://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/)
+旅行のまとめサイト"tsukutabi"のコードまとめ!!
 
-[![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
-
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
-Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+暫定 メインフレームワークはcakephp2だけど　早めに3にバージョンを上げたい
 
 
-## Some Handy Links
+##controller規約
 
-[CakePHP](http://www.cakephp.org) - The rapid development PHP framework
+自作した直接使わない関数はMyFunctionsComponentにまとめる
 
-[CookBook](http://book.cakephp.org) - THE CakePHP user documentation; start learning here!
+スマホ/web共通で使う関数は httprequestComponentにまとめる
 
-[API](http://api.cakephp.org) - A reference to CakePHP's classes
+sql系はSqlComponentにまとめる
 
-[Plugins](http://plugins.cakephp.org/) - A repository of extensions to the framework
+controllerは薄く!!　基本的にcomponentを呼び出す方針で
 
-[The Bakery](http://bakery.cakephp.org) - Tips, tutorials and articles
+##model規約
 
-[Community Center](http://community.cakephp.org) - A source for everything community related
+極力sqlを書く!!
+favとcommentsはアソシエーション使うよ
 
-[Training](http://training.cakephp.org) - Join a live session and get skilled with the framework
-
-[CakeFest](http://cakefest.org) - Don't miss our annual CakePHP conference
-
-[Cake Software Foundation](http://cakefoundation.org) - Promoting development related to CakePHP
-
-
-## Get Support!
-
-[#cakephp](http://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake
-
-[Google Group](https://groups.google.com/group/cake-php) - Community mailing list and forum
-
-[GitHub Issues](https://github.com/cakephp/cakephp/issues) - Got issues? Please tell us!
-
-[Roadmaps](https://github.com/cakephp/cakephp/wiki#roadmaps) - Want to contribute? Get involved!
+##viewでのphp処理を減らす!!!!
+写真が動く時とかはjquery
+コメントはangular.jsで 記事が出てたからそれ流用しようかな
 
 
-## Contributing
+(csrf_xss対策用のaccess token送り忘れるとblack holeエラーになるので要注意)
 
-[CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
+###TODO
 
-[CookBook "Contributing" Section (2.x)](http://book.cakephp.org/2.0/en/contributing.html) [(3.0)](http://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project
+security component 
+tokenつける
+
+jsonの再設計>>余計なデータ返さないようにする。
+viewで処理が多くなってるので減らす
+
+
+###共有規約
+SNSログイン機能は実装しない
+
+# do travel share it
