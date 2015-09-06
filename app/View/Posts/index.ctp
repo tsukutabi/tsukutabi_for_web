@@ -16,11 +16,10 @@
 
 <div class="uk-conatiner">
 <header>
-    <nav class="uk-navbar" data-uk-sticky> 
-
+    <nav class="uk-navbar" data-uk-sticky>
         <ul class="uk-navbar-nav">
             <?php if (isset($username)) {
-    echo   '<li ><a href="'.FULL_BASE_URL.'/cakephp/users/users/view/'."$username".'"">'. "$username" .'</a></li>';
+    echo   '<li ><a href="'.FULL_BASE_URL.'/cakephp/users/users/view/'.$_SESSION['Auth']['User']['id'].'"">'. "$username" .'</a></li>';
             } else{
             echo '<li>';
             echo $this->html->link('ログイン画面',

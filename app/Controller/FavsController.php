@@ -23,17 +23,14 @@ class FavsController extends AppController{
             $this->log($_POST,LOG_DEBUG);
             $favsave['user_id'] = $_POST['user_id'];
             $favsave['post_id'] = $_POST['post_id'];
-
             // json response data ('succeed' と 'message'をJSON形式で返します)
             $succeed = $this->Fav->save($favsave);
             $message = $succeed ? '追加しました' : '追加に失敗しました';
-
             // Model::$validationErrors があれば、その先頭の一つをメッセージにセット
             if (!$succeed && $this->MyRecord->validationErrors) {
                 $validationError = array_shift($this->MyRecord->validationErrors);
                 $message = $validationError[0];
             }
-
             $data = compact('succeed', 'message');
             $this->response->type('json');
             echo json_encode($data);

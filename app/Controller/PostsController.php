@@ -26,8 +26,6 @@ class PostsController extends AppController{
 			// 15件取る
 			'order' => 'modified desc','limit' =>'15'
 			);
-		// ユーザーの名前を取る。
-		$this->set('username',$this->Session->read('Auth.User.username'));
 		// 以下書き換える!!
 		$this->set('posts',$this->Post->find('all'));
 		// 新着のデータ
