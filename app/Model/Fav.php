@@ -5,7 +5,7 @@
  */
 class Fav extends AppModel
 {
-    public $Components= array('Session','Auth','RequestHandler','Search.Prg','Security');
+    public $Components= array('Session','Auth','RequestHandler','Search.Prg');
     public $belongsTo =array('Post','User');
 
 
