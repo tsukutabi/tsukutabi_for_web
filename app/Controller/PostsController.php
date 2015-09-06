@@ -65,9 +65,6 @@ class PostsController extends AppController{
 		$token = $this->Session->read('_Token,key');
 		$this->set('tag_name',$this->Post->GetTagName());
 	if ($this->request->is('post') && $_POST['access.key'] == $token){
-		$this->log($_REQUEST,LOG_DEBUG);
-		$this->log($_POST,LOG_DEBUG);
-		$this->log($_FILES,LOG_DEBUG);
 		$this->Post->create();
 		// ファイル数のチェック80枚以下はエラー
 		$number = count($_FILES["photos"]["tmp_name"]);

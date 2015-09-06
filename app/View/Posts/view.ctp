@@ -3,12 +3,13 @@
         color: lightsteelblue;
         background-color: rgba(255,240,1,0.5);
     }
+    .UserComment {
+        float: left;
+    }
 </style>
-
 <div id="wrap">
-
-<?php echo $this->Html->script(array('jQuery.js','sly.js','hor.js'));?>
-<?php echo $this->Html->css('view');?>
+    <?php echo $this->Html->script(array('jQuery.js','sly.js','hor.js'));?>
+    <?php echo $this->Html->css('view');?>
 <!-- view.js -->
 <script type="text/javascript">
 jQuery(function($){
@@ -19,7 +20,6 @@ jQuery(function($){
   (function () {
     var $frame = $('#effects');
     var $wrap  = $frame.parent();
-
     // Call Sly on frame
     $frame.sly({
       horizontal: 1,
@@ -48,8 +48,8 @@ jQuery(function($){
 });
 </script>
 <div class="view_main_title">
-<h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?>  </h1>
-<input type="text" class="uk-form flt_rgt" placeholder="検索"> 
+<h1 class="h1"><?php echo h($post['Post']['MainTitle']); ?></h1>
+    <input type="text" class="uk-form flt_rgt" placeholder="検索">
 </div>
 <span class="SubTitle"><?php echo h($post['Post']['SubTitle']);?></span>
 <div class="edit">
@@ -66,21 +66,14 @@ jQuery(function($){
 </div>
 <div class="frame effects" id="effects" >
     <ul class="clearfix">
-        <li>
-            <?php echo $_SESSION['_Token']['csrfTokens'][0];?>
-            <?php var_dump($_SESSION['_Token']['csrfTokens']);?>
-        </li>
-        <li id="time_titles">
+        <li><p>コメント</p>
             <?php foreach ($post['Comment'] as $comment): ?>
                 <p class="UserComment" id="comment_<?php h($comment['id']);?>">
-        <?php echo h($comment['body']);?> by <?php echo h($comment['user_id']); ?>
-        <?php echo $this->Html->link('削除','#',array('class'=>'delete','data-comment-id'=>$comment['id'])); ?>
+        <?php echo h($comment['body']);?> by <?php echo h($comment['user_id']);?>
+        <?php echo $this->Html->link('削除','#',array('class'=>'delete','data-comment-id'=>$comment['id']));?>
                 </p>
-
             <?php endforeach;?>
-
             <!-- 削除用 js by たにはた-->
-
             <script>
                 $(function(){
                     $('a.delete').click(function(e){
@@ -93,10 +86,7 @@ jQuery(function($){
                     })
                 })
             </script>
-
-
             <!-- /削除用js-->
-
             <?php
             echo $this->Form->create('Comment',array('action'=>'add'));
             echo '<div class="uk-form-row">';
@@ -119,9 +109,6 @@ jQuery(function($){
 	    echo ' " ></li>';
         }?>
         <li>
-
-            <?php  ?>
-
             <div id="contents_sample_wrap">
                 <div class="text_box">3</div>
                 <input type="button" value="お気に入り" id="fav"/><!--クリックしたときにtext()を実行-->
@@ -152,7 +139,6 @@ jQuery(function($){
   <div class="googlemaps_view">
     <script type="text/javascript"></script>
   </div>
-
     <div class="controls center">
     <p class="nameofsite">つくたび.com</p>
     <button class=" prev uk-botton"><i class="icon-chevron-left"></i> prev</button>
@@ -160,46 +146,14 @@ jQuery(function($){
 
    <!--  <a class="view_sns" href="http://b.hatena.ne.jp/entry/hoge.html[共有したいURL]" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title="任意のタイトル">はてなブックマークに追加  </a> -->
 
-    <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo "FULL_BASE_URL"."";?>&text=<?php echo h($post['Post']['MainTitle']); ?>&via=[ツイート内に含まれるユーザー名]&related=[関連アカウント]" target="_blank"></a>
+    <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo "FULL_BASE_URL"."";?>
+        &text=<?php echo h($post['Post']['MainTitle']); ?>&via=[ツイート内に含まれるユーザー名]&related=[関連アカウント]" target="_blank"></a>
 
-    <a class="uk-icon-button uk-icon-facebook view_sns" href="http://www.facebook.com/share.php?u=[共有したいURL]" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"></a>
+    <a class="uk-icon-button uk-icon-facebook view_sns" href="http://www.facebook.com/share.php?u=[共有したいURL]"
+       onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"></a>
 
-    
-    
   </div>
-  
 </div>
-
-            <ul class="pages"></ul>
-
-<br>
-<ul>
-<?php foreach($post['Comment']as$comment):?>
-<li id="comment">
-<?php echo h($comment['body'])?> by <?php echo h($comment['user_id']); ?>
-    <p>コメント</p>
-    <?php
-echo $this->Form->create('Comment',array('action'=>'add'));
-    echo $this->Form->input('body',array('row'=>'3','label'=>'本文'));
-    echo $this->Form->input('Comment.post_id',array('type'=>'hidden','value'=>$post['Post']['id']));
-    echo $this->Form->end('送信');
-    ?>
-</li>
-
-    <?php echo $this->Form->postLink(
-                '削除',
-                array(
-                	'controller'=>'Comments',
-                	'action' => 'delete',$comment['id']),
-                array('confirm' => '本当に削除してもよろしいでしょうか??'));?>
-</li>
-<?php endforeach; ?>
-</ul>
-
-
-    < ?php echo $html->formTag() ?>
-    <input type=”hidden” name=”data[_Token][key]” value=”6ab2d0043ab0a0d7974324ccefe17806cb1279d5″ id=”Token1858912179 targetform″>
-
     <script>
         var click_count = 3;
         //▼▼ページ要素が操作可能になったときの処理
@@ -215,7 +169,6 @@ echo $this->Form->create('Comment',array('action'=>'add'));
                     url: 'http://112.168.33.10/cakephp/favs/add/',
                     dataType: 'json',
                     data : { user_id :<?php if (isset($user_id)){echo "$user_id";}?>,
-                        'data[_Token][key]':
                         post_id :<?php echo($post['Post']['id']);?> },
                     timeout:10000,
                     success: function(data) {
@@ -225,22 +178,6 @@ echo $this->Form->create('Comment',array('action'=>'add'));
                         alert("error");
                     }
                 });
-
             });
         });
     </script>
-
-    <!-- <script type="text/javascript">
-
-      $('img').error(function(){
-          $(this).attr({
-                src: '/testnews/images/logo.png',
-                  alt: 'エラー',
-                  style:'border: 0px solid #fff;width:400px;height:400px;'
-           });
-        });
-    </script> -->
-
-
-
-
