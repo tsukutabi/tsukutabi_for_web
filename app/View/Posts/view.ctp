@@ -104,7 +104,7 @@ jQuery(function($){
         </li>
         <?php
         $images = explode(',',$post['Post']['Images']);
-        foreach ($images as  $value) {
+        foreach ($images as  $value){
 	    echo '<li><img class="slider" src="/cakephp/img/'.$value;
 	    echo ' " ></li>';
         }?>
@@ -114,8 +114,6 @@ jQuery(function($){
                 <input type="button" value="お気に入り" id="fav"/><!--クリックしたときにtext()を実行-->
             </div>
             <p>written by <?php echo $post['User']['username']; ?></p>
-
-
         </li>
         <li>
             <?php
@@ -131,8 +129,6 @@ jQuery(function($){
             <div id="success"></div>
             <div id="sending"></div>
         </li>
-
-
 </ul>
 </div>
 
@@ -143,15 +139,12 @@ jQuery(function($){
     <p class="nameofsite">つくたび.com</p>
     <button class=" prev uk-botton"><i class="icon-chevron-left"></i> prev</button>
     <button class=" next uk-botton">next <i class="icon-chevron-right"></i></button>
-
    <!--  <a class="view_sns" href="http://b.hatena.ne.jp/entry/hoge.html[共有したいURL]" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title="任意のタイトル">はてなブックマークに追加  </a> -->
-
     <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo FULL_BASE_URL;?>
         &text=<?php echo h($post['Post']['MainTitle']); ?>&via=[ツイート内に含まれるユーザー名]&related=[関連アカウント]" target="_blank"></a>
 
     <a class="uk-icon-button uk-icon-facebook view_sns" href="http://www.facebook.com/share.php?u=[共有したいURL]"
        onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"></a>
-
   </div>
 </div>
     <script>
@@ -172,7 +165,6 @@ jQuery(function($){
                         post_id :<?php echo($post['Post']['id']);?> },
                     timeout:10000,
                     success: function(data) {
-
                         alert("ok");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
