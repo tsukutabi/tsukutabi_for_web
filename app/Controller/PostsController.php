@@ -73,7 +73,7 @@ class PostsController extends AppController{
 			$this->Session->setFlash('画像の枚数は80枚以内にして下さい');
 			return 0;
 		}
-//        		画像のmimetypeの判定とリネーム アップロードの処理
+//        		画像のmimetypeの判定とリネーム アップロードの処理  ここ関数化したい!!
         for ($i=0; $i <$number; $i++){
             list($img_width[$i], $img_height[$i], $mime_type[$i], $attr[$i]) = getimagesize($_FILES['photos']['tmp_name'][$i]);
             $img_extension[$i]=$this->Post->checkmime($mime_type[$i]);

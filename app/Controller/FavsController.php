@@ -20,20 +20,27 @@ class FavsController extends AppController{
         $this->autoRender = false;
         $this->autoLayout = false;
         if ($this->request->is('ajax')){
-            $this->autoRender = false;
-            $this->autoLayout = false;
             $this->log($_POST,LOG_DEBUG);
             $favsave['user_id'] = $_POST['user_id'];
             $favsave['post_id'] = $_POST['post_id'];
-            $this->Fav->save($favsave);
-            $response = array('id'=> $id);
-//            $this->header('Content-Type:application/json');
-            echo json_encode($response);
-            exit();
+
+            // json response data ('succeed' と 'message'をJSON形式で返します)
+            $succeed = $this->Fav->save($favsave);
+            $message = $succeed ? '追加しました' : '追加に失敗しました';
+
+            // Model::$validationErrors があれば、その先頭の一つをメッセージにセット
+            if (!$succeed && $this->MyRecord->validationErrors) {
+                $validationError = array_shift($this->MyRecord->validationErrors);
+                $message = $validationError[0];
+            }
+
+            $data = compact('succeed', 'message');
+            $this->response->type('json');
+            echo json_encode($data);
+            exit;
         }
     }
     public function delete(){
-
         if ($this->request->is('ajax') && $this->request->is('post')){
 
         }
