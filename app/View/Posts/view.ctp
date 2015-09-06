@@ -146,7 +146,7 @@ jQuery(function($){
 
    <!--  <a class="view_sns" href="http://b.hatena.ne.jp/entry/hoge.html[共有したいURL]" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title="任意のタイトル">はてなブックマークに追加  </a> -->
 
-    <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo "FULL_BASE_URL"."";?>
+    <a class="uk-icon-button view_sns uk-icon-twitter" href="http://twitter.com/share?url=<?php echo FULL_BASE_URL;?>
         &text=<?php echo h($post['Post']['MainTitle']); ?>&via=[ツイート内に含まれるユーザー名]&related=[関連アカウント]" target="_blank"></a>
 
     <a class="uk-icon-button uk-icon-facebook view_sns" href="http://www.facebook.com/share.php?u=[共有したいURL]"
@@ -172,6 +172,7 @@ jQuery(function($){
                         post_id :<?php echo($post['Post']['id']);?> },
                     timeout:10000,
                     success: function(data) {
+
                         alert("ok");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
